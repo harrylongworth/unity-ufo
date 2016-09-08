@@ -6,6 +6,7 @@ using System.Collections;
 public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler {
 
 	public float smoothing;
+	// public GameObject joystick;
 
 	private Vector2 origin;
 	private Vector2 direction;
@@ -18,11 +19,20 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 		touched = false;
 	}
 
+	void Start() {
+	}
+
 	public void OnPointerDown (PointerEventData data) {
 		if (!touched) {
 			touched = true;
 			pointerID = data.pointerId;
 			origin = data.position;
+
+			// SHOW Joystick
+			// Vector3 joyPosition = new Vector3 (data.position.x, data.position.y,0.0f);
+			// Quaternion joyRotation = Quaternion.identity;
+			// Instantiate (joystick, joyPosition, joyRotation);
+
 		}
 	}
 
@@ -31,6 +41,12 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 			Vector2 currentPosition = data.position;
 			Vector2 directionRaw = currentPosition - origin;
 			direction = directionRaw.normalized;
+
+			// UPDATE Joystick
+			// Vector3 joyPosition = new Vector3 (data.position.x, data.position.y,0.0f);
+			// Quaternion joyRotation = Quaternion.identity;
+
+			// joystick.transform.position = joyPosition;
 		}
 	}
 
@@ -38,6 +54,8 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 		if (data.pointerId == pointerID) {
 			direction = Vector3.zero;
 			touched = false;
+
+			// Destroy(joystick);
 		}
 	}
 
