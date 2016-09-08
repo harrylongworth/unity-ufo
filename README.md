@@ -18,7 +18,7 @@ It needs to be fun and pretty.
 * Replace artwork with temporary art as not sure on the rights issues there. ie background, player and asteroid (Pickup)
 * Change so randomly generates pickups of the quantity as set by a parameter
 * changed the map size
-* changed the edge of the map so visually you see the background all the way to the edge of the screen and then bounce of an invisible "edge"
+* changed the edge of the map so visually you see the background all the way to the edge of the screen and then bounce off an invisible "edge"
 * Game now restarts automatically when you have collected a proportion of the total pickups
 
 
@@ -26,45 +26,56 @@ It needs to be fun and pretty.
 Current Sprint Start: 8 Sept
 
 To Do:
+
+Environment:
 * Swap out background image with the stars particle emitter from the space shooter with whole of background as the emitter
+* add ability to mess with map size and associated distribution of targets
+
+Player:
+* visual indicator of the "Joystick" with variations for corner and overtop.
 * change player object into a directional one (triangle)
-* change bad pickup image to just circle and increase size?
-* add explosions for pickups (just use one from space shooter initially but then move to a fun version)
 * change way player works so has constant velocity in direction pointed(doesn't slow down). (ie mass of 0 and drag of 0?) and doesn't spin. 
 * Slow it down for first levels. It can gradually speed up if apropriate in later leves but is currently too fast for young kids.
+* rotate player on steer
+* * add sound affects for steering/turning (screech?)?
+
+Pickups:
+* change bad pickup image to just circle and increase size?
+* add explosions for pickups (just use one from space shooter initially but then move to a fun version)
 * introduce full range of pickup objects (different colour) and distribute randomly in equal proportion (include option to make rare?)
-* add quest target (ie collect red, then green) and if attempt to collect something other than target bounce off.  (ie enable / disable is Rigid body Trigger
-* add quest hint for target (when you click on current target in bottom right corner auto steers you in direction of closest instance)
+* add option to turn on and off pickup tumble. (use as an advanced or option per round/scene as don't want letter tumble?)
+* add aural hint for pickups (ie colour names) on explode and on hint.
+* boing sound
+
+Game Logic:
+* add quest target (ie collect red, then green) and if attempt to collect something other than target bounce off it.  (ie enable / disable is Rigid body Trigger)
+* add quest hint for target (when you click on current target in bottom right corner auto steers you in direction of closest instance) - limit number of hints (or impact score - only get half points)
 * make sure there's always an instance of the first target pickup directly in front of the player at start 
 * order of collection (quests) as per order of targets in Inspector list 
 * add option to randomise target order instead
 * add option to collect all objects X times to complete level and make sure there enough objects created to enable that to happen
-* add option to turn on and off pickup tumble. (use as an advanced or option per round?)
-* add aural hint for pickups (ie colour names) on explode and on hint.
-* add sound affects for steering?
-* add ability to mess with map size and associated distribution of targets
-
 
 Stretch:
-* improve artwork (based on food - e.g. cookies and spag and big M n M's)
+* improve artwork (based on food? - e.g. cookies and spag and big M n M's)
 * add own background music
-* boing sound
-
 
 #FUTURE (Product Backlog):
-
-* Game GUI (Pause, Settings, Login/Player Select, Save Progress)
-* add additional target/pickup types in additional scenes (colour, shapes, numbers, letters (upper/lower), words)
-
-* visual indicator of the "Joystick" with variations for corner and overtop.
+* scoring based on "damage" from pickup bounces and collects count modified by hint use (50% if use of hint)
+* Game GUI (Pause, Settings, Login/Player Select, Save Progress, results)
+* add additional target/pickup types in additional scenes (colour, shapes, numbers, letters (upper/lower), words, food, furniture, animals, people) + ability for teacher to add / remove from "game"
 * although will start with visual & aural match, go to next scene (shapes pickups) on completion and then return to level 1 on completion of all levels (scenes) and then switch to just aural to confirm learning
 * add big collision barriers/objects to layout to increase complexity - use as map edge to introduce player to
 * Solar system based progression for theme for each scene (start at earth or sun?) or other space picture background progression from the NASA archives.
+* Zoom in / out (by pinch & slider?)
+
+* shields, tractor beam/sphere, speed control and weapons?
+* Home base that grows as you collect (for freeplay version has respawn when add to base) - possiblity of drag back to base config (need to work out how to do towing)
 
 #MULTI PLAYER
 * add ability to have multiple players either in team or as competitors
-* bounce off each other
+* bounce off each other?
 * tails? particularly of colourfull M n M's would look good.
+* base build mode (colours/types equate to different resource types)
 
 #TRACKING
 * use unity services to students, score, progress, metrics
@@ -73,6 +84,8 @@ Stretch:
 #DISTRIBUTING & UPDATING 
 * how does Unity support patching? We will publish through Teacher Virus initially as a WebGL
 * How does publishing through Teacher virus effect future ownership disputes etc.
+
+---
 
 #Version 0.1
 Additions to the base UFO Tutorial code as follows:
