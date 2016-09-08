@@ -9,16 +9,18 @@ public class PlayerController : MonoBehaviour {
 	public GameController gameController;
 	public SimpleTouchPad touchPad;
 	public SimpleTouchPad touchPad2;
-
+	public GameObject explosion;
 
 	private Rigidbody2D rb2d;
 	private int targetTally;
+	private AudioSource explodeAudio;
 
 
 	// Use this for initialization
 	void Start () {
 		// gameController = GameObject.FindGameObjectWithTag ("GameController");
 		rb2d = GetComponent<Rigidbody2D>();
+		explodeAudio = GetComponent<AudioSource> ();
 	
 	} 
 	
@@ -47,7 +49,12 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("PickUp")) 
 		{
-			other.gameObject.SetActive (false);
+			// other.gameObject.SetActive (false);
+
+			Instantiate(explosion,other.transform.position,other.transform.rotation);
+
+			Destroy(other.gameObject);
+			explodeAudio.Play();
 
 			targetTally++;
 			// rb2d.mass = rb2d.mass + targetMass;
