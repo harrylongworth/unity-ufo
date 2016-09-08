@@ -63,6 +63,13 @@ Stretch:
 * bounce off each other
 * tails?
 
+#TRACKING
+* use unity services to students, score, progress, metrics
+* 
+
+#DISTRIBUTING & UPDATING 
+* how does Unity support patching? We will publish through Teacher Virus initially as a WebGL
+
 #Version 0.1
 Additions to the base UFO Tutorial code as follows:
 
