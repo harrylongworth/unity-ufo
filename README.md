@@ -47,15 +47,17 @@ To Do:
 Stretch:
 * improve artwork (based on food - e.g. cookies and spag)
 * add own background music
-* 
+* boing sound
 
 
 #FUTURE (Product Backlog):
+
+* Game GUI (Pause, Settings, Login/Player Select, Save Progress)
 * add additional target/pickup types in additional scenes (colour, shapes, numbers, letters (upper/lower), words)
 
 * visual indicator of the "Joystick" with variations for corner and overtop.
 * although will start with visual & aural match, go to next scene (shapes pickups) on completion and then return to level 1 on completion of all levels (scenes) and then switch to just aural to confirm learning
-* add big collision barriers/objects to layout to increase complexity 
+* add big collision barriers/objects to layout to increase complexity - use as map edge to introduce player to
 * Solar system based progression for theme for each scene (start at earth or sun?)
 
 #MULTI PLAYER
