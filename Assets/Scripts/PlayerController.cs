@@ -4,16 +4,17 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
+	public float acceleration;
 	public float rotationSpeed;
 	public float targetMass;
 	public float completionToWin;
 	public GameController gameController;
-	public SimpleTouchPad touchPad;
-	public SimpleTouchPadPlayer touchPad2;
+	public SimpleTouchPadPlayer touchPadCenter;
 	public Canvas canvas;
 	public GameObject explosion;
 	public float centerCalibrate;
 
+	private float currentSpeed;
 	private Rigidbody2D rb2d;
 	private Transform playerPosition;
 	private int targetTally;
@@ -28,37 +29,23 @@ public class PlayerController : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D>();
 		explodeAudio = GetComponent<AudioSource> ();
 		currentDirection = new Vector2(0,1.0f);
+		currentSpeed = speed;
 	
 	} 
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 
+		// "Turn off" inertia:
 		rb2d.velocity = Vector2.zero;
-
-		// TouchPad
-		Vector2 direction = touchPad.GetDirection ();
-		float strength = touchPad.GetStrength ();
-		// Debug.Log (strength);
-
-		rb2d.AddTorque (direction.x * rotationSpeed * -1 * strength);
-		/*
-		if (direction != Vector2.zero) {
-			rb2d.AddForce (direction*speed);
-			currentDirection = rb2d.velocity;
-			// Debug.Log (direction);
-		}
-		*/
-		 
-
+		// currentSpeed = speed;
 
 		//Player Touchpad
-		Vector2 touchPosition = touchPad2.GetPosition ();
+		Vector2 touchPosition = touchPadCenter.GetPosition ();
 		// Debug.Log (touchPosition);
 
 		if (touchPosition != Vector2.zero) { // ie screen has been touched
 			
-			// float playerAngle = transform.eulerAngles.z;
 			Vector2 ScreenCenter = new Vector2 (Screen.width / 2, Screen.height / 2);
 			// Debug.Log (ScreenCenter);
 
@@ -75,40 +62,39 @@ public class PlayerController : MonoBehaviour {
 			float playerAngle = 360 - transform.rotation.eulerAngles.z;
 			// Debug.Log (playerAngle);
 
-			float turnAngle = Mathf.DeltaAngle(playerAngle,touchAngle);
+			float turnAngle = Mathf.DeltaAngle (playerAngle, touchAngle);
 			// Debug.Log (turnAngle);
 
-			//Vector2 moveTo = Vector2.MoveTowards(ScreenCenter,touchPosition,1.0f);
-			//Debug.Log (moveTo);
-
-			// Mathf.DeltaAngle(
-			// float turnDirection = 
-
-			float turnDirection = Mathf.Sign(turnAngle);
+			float turnDirection = Mathf.Sign (turnAngle);
 			// Debug.Log (turnDirection);
 
-			float strength2 = Vector2.Distance (ScreenCenter, touchPosition);
-			// Debug.Log (strength2);
 
-			if (Mathf.Abs(turnAngle) > centerCalibrate) { // get rid of shudder
+
+			if (Mathf.Abs (turnAngle) > centerCalibrate) { // get rid of shudder
 				rb2d.AddTorque (turnDirection * -1.0f * rotationSpeed);
-			}
-			// rb2d.AddTorque (turnDirection * rotationSpeed * strength2);
 
-			//rb2d.AddTorque (direction2.x * rotationSpeed * -1 * strength2);
+				// Accelerate based on distance of tap from center
+				float strength2 = Vector2.Distance (ScreenCenter, touchPosition);
+				// Debug.Log (strength2);
 
-			/*
-			if (direction2 != Vector2.zero) {
-				rb2d.AddForce (direction2*speed);
-				currentDirection = rb2d.velocity;
-				// Debug.Log (direction2);
-			}
-			*/
-		}
+				currentSpeed = speed + (strength2 / (Mathf.Max (Screen.width, Screen.height))) * acceleration;
+			} 
+
+		} else {
+			currentSpeed = speed; // reset speed to default speed
+		}// END Screen has been touched
 
 		// Keyboard Input
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
+
+		if(Input.GetKey(KeyCode.Space)||Input.GetKey(KeyCode.UpArrow)) { 
+			currentSpeed = (acceleration/2) * speed; 
+		} 
+
+		if(Input.GetKeyUp(KeyCode.Space)||Input.GetKeyUp(KeyCode.UpArrow)) { 
+			currentSpeed = speed; 
+		}
 
 		// Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 
@@ -116,56 +102,12 @@ public class PlayerController : MonoBehaviour {
 			rb2d.AddTorque (moveHorizontal * rotationSpeed * -1);
 		}
 
-		/*
-		if (movement != Vector2.zero) {
-			rb2d.AddForce (movement*speed);
-			currentDirection = rb2d.velocity;
-			Debug.Log (movement);
-		}
-*/
-
-		// Debug.Log (currentDirection);
-		// rb2d.AddForce (currentDirection*speed);
-		// rb2d.velocity = currentDirection*speed;
-
-		//Debug.Log (rb2d.GetVector());
-
-		// playerRotation = Quaternion.Euler(0, 0, rb2d.rotation);
-
-		// transform.rotation = playerRotation;
-		// transform.rotation = rb2d.rotation
-		// rb2d.angularVelocity = 0.0f;
-
-
-		// Apply force in the direction player is currently poingint
-		// currentDirection = new Vector2(transform.rotation.x,transform.rotation.y);
-
-		/*
-		if (rb2d.velocity != Vector2.zero) {
-			currentDirection = rb2d.velocity;
-		}
-*/
-
 		float radianAngle = -1*(Mathf.Deg2Rad * (transform.eulerAngles.z-360.0f));
 		// Debug.Log (radianAngle);
 
 		currentDirection = new Vector2 (Mathf.Sin (radianAngle),Mathf.Cos (radianAngle));
 
-
-		// Debug.Log (transform.eulerAngles);
-
-		// Apply force in the direction player is currently poingint
-		// var tempvec3 = new Vector3(1,1,1);
-		// var tid = Vector3.one;
-		// var rotationtemp = transform.rotation * tid;	
-		// currentDirection = new Vector2(transform.rotation.x,transform.rotation.y);
-		// currentDirection=rotationtemp;
-
-
-		// Debug.Log (transform.rotation.z);
-		// Debug.Log (currentDirection);
-
-		rb2d.AddForce (currentDirection * speed);
+		rb2d.AddForce (currentDirection * currentSpeed);
 	}
 
 	void OnTriggerEnter2D (Collider2D other) 
@@ -199,6 +141,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			// Bounce off
 			transform.Rotate (0, 0, 180);
+
 		} // END if else
 		
 	} // end OnTriggerEnter2D
