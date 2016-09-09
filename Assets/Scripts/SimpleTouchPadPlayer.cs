@@ -3,23 +3,15 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler {
+public class SimpleTouchPadPlayer : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler {
 
-	public float smoothing;
-	public int calibrateStrength;
-	// public GameObject joystick;
-
-	private Vector2 origin;
-	private Vector2 direction;
-	private Vector2 smoothDirection;
+	public Vector2 touchPosition;
 	private bool touched;
 	private int pointerID;
-	private float strength;
 
 	void Awake () {
-		direction = Vector2.zero;
+		touchPosition = Vector2.zero;
 		touched = false;
-		strength = 0;
 	}
 
 	void Start() {
@@ -29,9 +21,9 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 		if (!touched) {
 			touched = true;
 			pointerID = data.pointerId;
-			origin = data.position;
+			touchPosition = data.position;
 
-			// SHOW Joystick
+						// SHOW Joystick
 			// Vector3 joyPosition = new Vector3 (data.position.x, data.position.y,0.0f);
 			// Quaternion joyRotation = Quaternion.identity;
 			// Instantiate (joystick, joyPosition, joyRotation);
@@ -41,11 +33,8 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
 	public void OnDrag (PointerEventData data) {
 		if (data.pointerId == pointerID) {
-			Vector2 currentPosition = data.position;
-			Vector2 directionRaw = currentPosition - origin;
-			direction = directionRaw.normalized;
 
-			strength = directionRaw.magnitude;
+			touchPosition = data.position;
 
 			// UPDATE Joystick
 			// Vector3 joyPosition = new Vector3 (data.position.x, data.position.y,0.0f);
@@ -57,20 +46,23 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
 	public void OnPointerUp (PointerEventData data) {
 		if (data.pointerId == pointerID) {
-			direction = Vector2.zero;
+			touchPosition = Vector2.zero;
 			touched = false;
 
 			// Destroy(joystick);
 		}
 	}
 
-	public Vector2 GetDirection () {
-		smoothDirection = Vector2.MoveTowards (smoothDirection, direction, smoothing);
+	public Vector2 GetPosition () {
+		//smoothDirection = Vector2.MoveTowards (smoothDirection, direction, smoothing);
+
 		//return smoothDirection;
-		return direction;
+		return touchPosition;
 	}
 
-	public float GetStrength () {
-		return strength/calibrateStrength;
-	} // END GetStrength
+	public Vector2 GetCenter () {
+
+		return new Vector2 (transform.position.x, transform.position.y);
+
+	}
 }
