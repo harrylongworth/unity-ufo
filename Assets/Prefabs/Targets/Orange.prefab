@@ -21,10 +21,10 @@ GameObject:
   - 4: {fileID: 4000012167701602}
   - 212: {fileID: 212000012329566942}
   - 58: {fileID: 58000012891715558}
-  - 114: {fileID: 114000010072534224}
   - 50: {fileID: 50000011276874154}
+  - 114: {fileID: 114000014069367552}
   m_Layer: 0
-  m_Name: Pickup 7
+  m_Name: Orange
   m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -74,7 +74,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 13.430592
---- !u!114 &114000010072534224
+--- !u!114 &114000014069367552
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -82,9 +82,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011782126192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23486a7d131df4d0ea36ccf960a14c15, type: 3}
+  m_Script: {fileID: 11500000, guid: 7448efd000f974f66a48b0227da428ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxVelocity: 200
+  targetName: 
+  isIndicator: 0
 --- !u!212 &212000012329566942
 SpriteRenderer:
   m_ObjectHideFlags: 1

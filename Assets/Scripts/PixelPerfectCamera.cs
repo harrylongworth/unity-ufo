@@ -17,10 +17,10 @@ public class PixelPerfectCamera : MonoBehaviour {
 		var camera = GetComponent<Camera> ();
 		if (camera.orthographic) {
 			scale = Screen.height / nativeResolution.y;
-			Debug.Log (scale);
+			// Debug.Log (scale);
 			pixeltoUnits *= scale;
 			camera.orthographicSize = (Screen.height/2.0f)/pixeltoUnits;
-			Debug.Log (camera.orthographicSize);
+			// Debug.Log (camera.orthographicSize);
 		} // End if
 
 	} // END Awake

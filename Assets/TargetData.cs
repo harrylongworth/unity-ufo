@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Rotator : MonoBehaviour {
+public class TargetData : MonoBehaviour {
+
+	public string targetName;
 
 	// Use this for initialization
 	void Start () {
@@ -10,8 +12,6 @@ public class Rotator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		Vector3 rotateBy = new Vector3 (0, 0, 45) * Time.deltaTime;
-		transform.Rotate (rotateBy);
+	
 	}
 }

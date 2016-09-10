@@ -112,14 +112,15 @@ public class PlayerController : MonoBehaviour {
 	{
 		// Debug.Log (other.tag);
 
-		if (other.gameObject.CompareTag ("PickUp")) {
+		if (other.gameObject.CompareTag ("Pickup")) {
 			// other.gameObject.SetActive (false);
 
-			if (false) { // to do 
+			Debug.Log (gameController.currentTargetName);
+			Debug.Log (other.gameObject.name);
+			if ((other.gameObject.name==gameController.currentTargetName)||(other.gameObject.name==gameController.currentTargetName+"(Clone)")) { // to do 
 				// Not a current target (Quest)
-				// Bounce! 
-				transform.Rotate (0, 0, 180);
-			} else {
+				Debug.Log("matches");
+				gameController.NextTarget ();
 				// Is a quest target:
 				Instantiate (explosion, other.transform.position, other.transform.rotation);
 
@@ -135,6 +136,12 @@ public class PlayerController : MonoBehaviour {
 					// SceneManager.LoadScene (SceneManager.GetActiveScene()); // need to update
 
 				}
+
+			} else {
+				Debug.Log("No match");
+				Debug.Log (other.gameObject.name); 
+				// Bounce! 
+				transform.Rotate (0, 0, 180);
 
 			} // END pickup if
 
