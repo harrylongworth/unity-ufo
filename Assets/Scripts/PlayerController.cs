@@ -6,8 +6,6 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public float acceleration;
 	public float rotationSpeed;
-	public float targetMass;
-	public float completionToWin;
 	public GameController gameController;
 	public SimpleTouchPadPlayer touchPadCenter;
 	public Canvas canvas;
@@ -32,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 		currentSpeed = speed;
 	
 	} 
-	
+		
 	// Update is called once per frame
 	void FixedUpdate () {
 
@@ -89,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 		float moveVertical = Input.GetAxis ("Vertical");
 
 		if(Input.GetKey(KeyCode.Space)||Input.GetKey(KeyCode.UpArrow)) { 
-			currentSpeed = (acceleration/2) * speed; 
+			currentSpeed = (acceleration/4) * speed; 
 		} 
 
 		if(Input.GetKeyUp(KeyCode.Space)||Input.GetKeyUp(KeyCode.UpArrow)) { 
@@ -112,6 +110,8 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) 
 	{
+		// Debug.Log (other.tag);
+
 		if (other.gameObject.CompareTag ("PickUp")) {
 			// other.gameObject.SetActive (false);
 
@@ -128,8 +128,9 @@ public class PlayerController : MonoBehaviour {
 
 				targetTally++;
 
-
-				if (targetTally > completionToWin * gameController.targets) {
+				// CHECK VICTORY conditions
+				if (targetTally > gameController.targetsNeededToWin) {
+					//restart level
 					Application.LoadLevel (Application.loadedLevel);
 					// SceneManager.LoadScene (SceneManager.GetActiveScene()); // need to update
 
@@ -138,12 +139,9 @@ public class PlayerController : MonoBehaviour {
 			} // END pickup if
 
 
-		} else {
-			// Bounce off
-			transform.Rotate (0, 0, 180);
-
-		} // END if else
+		} 
 		
 	} // end OnTriggerEnter2D
+
 
 } // END class
