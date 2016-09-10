@@ -11,17 +11,21 @@ public class GameController : MonoBehaviour {
 	public int targetSets;
 	public int halfMapSide;
 
-	public Text currentTargetText;
+	public Text displayTime;
 
 	private string[] targetNames;
 	public string currentTargetName;
 	public int currentTargetIndex;
 	private GameObject currentTargetIndicator;
+	private float startTime;
 
 	private GameObject targetTemp;
 
+	private float timeTicker;
+
 	// Use this for initialization
 	void Start () {
+		startTime = Time.time;
 		targetNames = new string[targets.Length];
 
 		float borderX = Screen.width / 2;
@@ -51,7 +55,7 @@ public class GameController : MonoBehaviour {
 		currentTargetName = targetNames [0];
 		currentTargetIndex = 0;
 		Destroy (currentTargetIndicator);
-		currentTargetText.text=currentTargetName;
+		displayTime.text = "0";
 		currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,1), Quaternion.identity);
 		currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		currentTargetIndicator.tag = "Indicator";
@@ -61,6 +65,10 @@ public class GameController : MonoBehaviour {
 	} // END start
 
 	void Update() {
+
+		timeTicker = Mathf.Round(Time.time - startTime);
+		displayTime.text = timeTicker.ToString();
+
 		CatchOffMap ();
 	} // END Update
 
@@ -127,7 +135,7 @@ public class GameController : MonoBehaviour {
 
 		currentTargetName = targets [currentTargetIndex].name;
 
-		currentTargetText.text=currentTargetName;
+		displayTime.text=currentTargetName;
 		currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,1), Quaternion.identity);
 		currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 
