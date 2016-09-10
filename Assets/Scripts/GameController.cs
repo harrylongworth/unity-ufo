@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
 	public int halfMapSide;
 
 	public Text displayTime;
+	public Text displayDamage;
+	public Text displayScore;
 
 	private string[] targetNames;
 	public string currentTargetName;
@@ -22,10 +24,21 @@ public class GameController : MonoBehaviour {
 	private GameObject targetTemp;
 
 	private float timeTicker;
+	private int playerDamage;
+	private int score;
 
 	// Use this for initialization
 	void Start () {
 		startTime = Time.time;
+
+		//Damage
+		playerDamage = 0;
+		displayDamage.text = "Damage: "+playerDamage.ToString();
+
+		//Score
+		score = 0;
+		displayScore.text = "Score: "+score.ToString();
+
 		targetNames = new string[targets.Length];
 
 		float borderX = Screen.width / 2;
@@ -55,7 +68,7 @@ public class GameController : MonoBehaviour {
 		currentTargetName = targetNames [0];
 		currentTargetIndex = 0;
 		Destroy (currentTargetIndicator);
-		displayTime.text = "0";
+		displayTime.text = "Time: 0";
 		currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,1), Quaternion.identity);
 		currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		currentTargetIndicator.tag = "Indicator";
@@ -67,7 +80,7 @@ public class GameController : MonoBehaviour {
 	void Update() {
 
 		timeTicker = Mathf.Round(Time.time - startTime);
-		displayTime.text = timeTicker.ToString();
+		displayTime.text = "Time: "+timeTicker.ToString();
 
 		CatchOffMap ();
 	} // END Update
@@ -143,6 +156,17 @@ public class GameController : MonoBehaviour {
 		currentTargetIndicator.name = "Indicator";
 		currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,0.0f);
 
+	}
+
+	public void incrementPlayerDamage() {
+		playerDamage++;
+		displayDamage.text = "Damage: "+playerDamage.ToString();
+	}
+
+
+	public void incrementScore() {
+		score++;
+		displayScore.text = "Score: "+score.ToString();
 	}
 
 } // FND class

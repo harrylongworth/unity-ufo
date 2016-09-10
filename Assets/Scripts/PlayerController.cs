@@ -121,7 +121,9 @@ public class PlayerController : MonoBehaviour {
 
 			if ((other.gameObject.name==gameController.currentTargetName)||(other.gameObject.name==gameController.currentTargetName+"(Clone)")) 
 			{ // to do 
-				// Not a current target (Quest)
+
+				gameController.incrementScore ();
+				// Is the current target (Quest)
 				//Debug.Log("matches");
 				gameController.NextTarget ();
 				// Is a quest target:
@@ -142,8 +144,10 @@ public class PlayerController : MonoBehaviour {
 				}
 
 			} else {
-				// Debug.Log("No match! "+gameController.currentTargetName+" is current target and hit "+other.gameObject.name);
+				// Not the current target
 
+				// Debug.Log("No match! "+gameController.currentTargetName+" is current target and hit "+other.gameObject.name);
+				gameController.incrementPlayerDamage();
 				// Bounce! 
 				transform.Rotate (0, 0, 180);
 
