@@ -25,11 +25,6 @@ public class TargetController : MonoBehaviour {
 	void Update() {
 
 		if (tag == "Indicator") {
-			isIndicator = true;
-			Debug.Log ("Indicator true");
-		}
-
-		if (isIndicator) {
 			player = GameObject.FindGameObjectWithTag ("Player");
 			offset = new Vector3(0.5f,-1*(Screen.height/2)*0.1f,5.0f);
 

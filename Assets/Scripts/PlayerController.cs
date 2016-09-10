@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		// Debug.Log (other.tag);
 
-		if (other.gameObject.CompareTag ("Pickup")) {
+		if (other.gameObject.CompareTag ("Target")) {
 			// other.gameObject.SetActive (false);
 
 			Debug.Log (gameController.currentTargetName);

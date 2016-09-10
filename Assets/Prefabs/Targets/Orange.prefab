@@ -25,7 +25,7 @@ GameObject:
   - 114: {fileID: 114000014069367552}
   m_Layer: 0
   m_Name: Orange
-  m_TagString: PickUp
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

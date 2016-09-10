@@ -7,6 +7,8 @@ TagManager:
   - Pickup
   - Indicator
   - Player
+  - PickUp
+  - Target
   layers:
   - Default
   - TransparentFX
