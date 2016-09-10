@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	private int targetTally;
 	private AudioSource explodeAudio;
 	private Vector2 currentDirection;
-	private Quaternion playerRotation = Quaternion.identity;
+	// private Quaternion playerRotation = Quaternion.identity;
 
 
 	// Use this for initialization
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour {
 
 		// Keyboard Input
 		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
+		// float moveVertical = Input.GetAxis ("Vertical");
 
 		if(Input.GetKey(KeyCode.Space)||Input.GetKey(KeyCode.UpArrow)) { 
 			currentSpeed = (acceleration/4) * speed; 
@@ -115,11 +115,14 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Target")) {
 			// other.gameObject.SetActive (false);
 
-			Debug.Log (gameController.currentTargetName);
-			Debug.Log (other.gameObject.name);
-			if ((other.gameObject.name==gameController.currentTargetName)||(other.gameObject.name==gameController.currentTargetName+"(Clone)")) { // to do 
+			// string message = gameController.currentTargetName + " is current target and hit " + other.gameObject.name;
+			// Debug.Log (message);
+			// Debug.Log (other.gameObject.name);
+
+			if ((other.gameObject.name==gameController.currentTargetName)||(other.gameObject.name==gameController.currentTargetName+"(Clone)")) 
+			{ // to do 
 				// Not a current target (Quest)
-				Debug.Log("matches");
+				//Debug.Log("matches");
 				gameController.NextTarget ();
 				// Is a quest target:
 				Instantiate (explosion, other.transform.position, other.transform.rotation);
@@ -133,13 +136,14 @@ public class PlayerController : MonoBehaviour {
 				if (targetTally > gameController.targetsNeededToWin) {
 					//restart level
 					Application.LoadLevel (Application.loadedLevel);
+					Debug.Log ("RESTART! - Level Complete");
 					// SceneManager.LoadScene (SceneManager.GetActiveScene()); // need to update
 
 				}
 
 			} else {
-				Debug.Log("No match");
-				Debug.Log (other.gameObject.name); 
+				// Debug.Log("No match! "+gameController.currentTargetName+" is current target and hit "+other.gameObject.name);
+
 				// Bounce! 
 				transform.Rotate (0, 0, 180);
 

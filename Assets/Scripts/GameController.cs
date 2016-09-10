@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
 	public int currentTargetIndex;
 	private GameObject currentTargetIndicator;
 
+	private GameObject targetTemp;
 
 	// Use this for initialization
 	void Start () {
@@ -30,17 +31,20 @@ public class GameController : MonoBehaviour {
 		float spawnRangeX = spawnRange-borderX;
 		float spawnRangeY = spawnRange-borderY;
 
+
 		for (int i = 0; i < targetSets; i++) {
 			for (int x = 0; x < targets.Length; x++) {
 
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnRangeX, spawnRangeX), Random.Range (-spawnRangeY, spawnRangeY),0.0f);
 				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (targets[x], spawnPosition, spawnRotation);
+				targetTemp = (GameObject) Instantiate (targets[x], spawnPosition, spawnRotation);
 				if (i == 0) {
 					targetNames[x]=targets[x].name;
+					// targetNames [x] = targetTemp.name;
 					// Debug.Log (targetNames[x]);
+					// Debug.Log (targetTemp.name);
 				} 
-			
+				// Debug.Log (targetTemp.name);
 			}
 		} // END for
 
@@ -114,7 +118,7 @@ public class GameController : MonoBehaviour {
 
 	public void NextTarget () {
 
-		Debug.Log (currentTargetName);
+
 
 		currentTargetIndex++;
 		if (currentTargetIndex > targets.Length-1) {
