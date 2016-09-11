@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	private Transform playerPosition;
 	private int targetTally;
+
+
 	private AudioSource explodeAudio;
+	private AudioSource bounceAudio;
 	private Vector2 currentDirection;
 	// private Quaternion playerRotation = Quaternion.identity;
 
@@ -25,7 +28,11 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		// gameController = GameObject.FindGameObjectWithTag ("GameController");
 		rb2d = GetComponent<Rigidbody2D>();
-		explodeAudio = GetComponent<AudioSource> ();
+
+		AudioSource[] tempAudio = GetComponents<AudioSource> ();
+		explodeAudio = tempAudio[0];
+		bounceAudio = tempAudio [1];
+
 		currentDirection = new Vector2(0,1.0f);
 		currentSpeed = speed;
 	
@@ -146,10 +153,14 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				// Not the current target
 
+				gameController.playCurrentTargetAudio();
+
 				// Debug.Log("No match! "+gameController.currentTargetName+" is current target and hit "+other.gameObject.name);
 				gameController.IncrementPlayerDamage();
 				// Bounce! 
 				transform.Rotate (0, 0, 180);
+
+				bounceAudio.Play ();
 
 			} // END pickup if
 
