@@ -126,17 +126,53 @@ public class PlayerController : MonoBehaviour {
 			// Debug.Log (message);
 			// Debug.Log (other.gameObject.name);
 
-			if ((other.gameObject.name==gameController.currentTargetName)||(other.gameObject.name==gameController.currentTargetName+"(Clone)")) 
-			{ // to do 
+			if (gameController.enableQuests) {
+				if ((other.gameObject.name == gameController.currentTargetName) || (other.gameObject.name == gameController.currentTargetName + "(Clone)")) { // to do 
+
+					gameController.IncrementScore ();
+					// Is the current target (Quest)
+					//Debug.Log("matches");
+					gameController.NextTarget ();
+					// Is a quest target:
+					Instantiate (explosion, other.transform.position, other.transform.rotation);
+
+					Destroy (other.gameObject);
+					explodeAudio.Play ();
+
+					targetTally++;
+
+					// CHECK VICTORY conditions
+					if (targetTally > gameController.targetsNeededToWin) {
+						//restart level
+						Application.LoadLevel (Application.loadedLevel);
+						Debug.Log ("RESTART! - Level Complete");
+						// SceneManager.LoadScene (SceneManager.GetActiveScene()); // need to update
+
+					}
+
+				} else {
+					// Not the current target
+
+					gameController.playCurrentTargetAudio ();
+
+					// Debug.Log("No match! "+gameController.currentTargetName+" is current target and hit "+other.gameObject.name);
+					gameController.IncrementPlayerDamage ();
+					// Bounce! 
+					transform.Rotate (0, 0, 180);
+
+					bounceAudio.Play ();
+
+				} // END pickup if
+
+			} else {
+				// QUESTS disabled
 
 				gameController.IncrementScore ();
-				// Is the current target (Quest)
-				//Debug.Log("matches");
-				gameController.NextTarget ();
-				// Is a quest target:
+
 				Instantiate (explosion, other.transform.position, other.transform.rotation);
 
 				Destroy (other.gameObject);
+
 				explodeAudio.Play ();
 
 				targetTally++;
@@ -149,21 +185,7 @@ public class PlayerController : MonoBehaviour {
 					// SceneManager.LoadScene (SceneManager.GetActiveScene()); // need to update
 
 				}
-
-			} else {
-				// Not the current target
-
-				gameController.playCurrentTargetAudio();
-
-				// Debug.Log("No match! "+gameController.currentTargetName+" is current target and hit "+other.gameObject.name);
-				gameController.IncrementPlayerDamage();
-				// Bounce! 
-				transform.Rotate (0, 0, 180);
-
-				bounceAudio.Play ();
-
-			} // END pickup if
-
+			} // END if quests enabled
 
 		} 
 		

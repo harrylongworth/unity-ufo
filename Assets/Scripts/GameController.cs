@@ -5,16 +5,21 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 
 	public GameObject [] targets;
+	public bool enableQuests = true;
+	public bool showQuestName = true;
+	public bool targetIndicatorEnabled = true;
+	public bool sayQuestName = true;
 	public int targetsNeededToWin;
 	public GameObject player;
 	public GameObject background;
 	public int targetSets;
 	public int halfMapSide;
-	public bool targetIndicatorEnabled = true;
+
 
 	public Text displayTime;
 	public Text displayDamage;
 	public Text displayScore;
+	public Text displayQuestName;
 
 	private string[] targetNames;
 	public string currentTargetName;
@@ -69,22 +74,43 @@ public class GameController : MonoBehaviour {
 			}
 		} // END for
 
-		currentTargetObject = targets [0];
-		playCurrentTargetAudio ();
+		if (enableQuests) {
 
-		currentTargetName = targetNames [0];
-		currentTargetIndex = 0;
-		displayTime.text = "Time: 0";
 
-		// targets[currentTargetIndex].GetComponent<AudioSource>().Play();
+			currentTargetObject = targets [0];
 
-		if (targetIndicatorEnabled) {
-			currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,1), Quaternion.identity);
-			currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-			currentTargetIndicator.tag = "Indicator";
-			currentTargetIndicator.name = "Indicator";
-			currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,0.0f);
-		}
+			playCurrentTargetAudio ();
+
+			currentTargetName = targetNames [0];
+
+			if (showQuestName) {
+				displayQuestName.enabled = true;
+			} else {
+				displayQuestName.enabled = false;
+			}
+
+			displayQuestName.text = currentTargetName;
+
+			currentTargetIndex = 0;
+			displayTime.text = "Time: 0";
+
+			// targets[currentTargetIndex].GetComponent<AudioSource>().Play();
+
+			if (targetIndicatorEnabled) {
+				currentTargetIndicator = (GameObject)Instantiate (targets [currentTargetIndex], new Vector3 (20, 20, 1), Quaternion.identity);
+				currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+				currentTargetIndicator.tag = "Indicator";
+				currentTargetIndicator.name = "Indicator";
+				currentTargetIndicator.transform.localScale = new Vector3 (0.5f, 0.5f, 0.0f);
+			} 
+
+
+		} else {
+			displayQuestName.enabled = false;
+
+			displayDamage.enabled = false;
+		}		// END enableQuests is true
+
 
 
 	} // END start
@@ -151,8 +177,6 @@ public class GameController : MonoBehaviour {
 
 	public void NextTarget () {
 
-
-
 		currentTargetIndex++;
 		if (currentTargetIndex > targets.Length-1) {
 			currentTargetIndex = 0;
@@ -175,6 +199,8 @@ public class GameController : MonoBehaviour {
 		}
 
 		playCurrentTargetAudio ();
+
+		displayQuestName.text = currentTargetName;
 			
 	}
 
@@ -201,36 +227,37 @@ public class GameController : MonoBehaviour {
 
 	public void playCurrentTargetAudio() {
 
-		Debug.Log ("Play Audio?");
+		if (sayQuestName) {
+			// Debug.Log ("Play Audio?");
 
-		AudioSource[] tempAudio = GetComponents<AudioSource> ();
+			AudioSource[] tempAudio = GetComponents<AudioSource> ();
+			AudioSource currentAudio = tempAudio [currentTargetIndex];
 
-		AudioSource currentAudio = tempAudio [currentTargetIndex];
+			currentAudio.volume = 1.0f;
+			currentAudio.PlayDelayed (0.5f);
 
-		currentAudio.volume = 1.0f;
-		currentAudio.PlayDelayed (0.5f);
+		}
 
+		//  BELOW should work but doesn't :( so try adding audio direct to Game Controller
 
-		/*  BELOW should work but doesn't :( so try adding audio direct to Game Controller
-		 * 
-		AudioSource tempAudio = targets[currentTargetIndex].GetComponent<AudioSource> ();
+		//AudioSource tempAudio = targets[currentTargetIndex].GetComponent<AudioSource> ();
 			
 		// AudioSource tempAudio = currentTargetObject.GetComponent<AudioSource> ();
 		// AudioSource tempAudio = GetComponent<AudioSource> ();
 
-		tempAudio.volume = 1;
+//		tempAudio.volume = 1;
 
-		if (tempAudio!=null) {
-			Debug.Log (tempAudio.name);
-			tempAudio.Play ();
-
-		} else {
-			Debug.Log ("ERROR: AudioSource is NULL");
-		}
+//		if (tempAudio!=null) {
+//			Debug.Log (tempAudio.name);
+//			tempAudio.Play ();
+		//
+	//	} else {
+	//		Debug.Log ("ERROR: AudioSource is NULL");
+	//	}
 
 		// targets [currentTargetIndex].GetComponent<AudioSource> ().Play ();
 
-		*/
+
 	} // end playCurrent
 
 
