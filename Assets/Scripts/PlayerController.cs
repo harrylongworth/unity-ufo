@@ -12,11 +12,17 @@ public class PlayerController : MonoBehaviour {
 	public GameObject explosion;
 	public float centerCalibrate;
 
+	public int currentShield;
+	public int currentLives;
+
 	private float currentSpeed;
 	private Rigidbody2D rb2d;
 	private Transform playerPosition;
 	private int targetTally;
 
+
+	private int playerDamage;
+	private int score;
 
 	private AudioSource explodeAudio;
 	private AudioSource bounceAudio;
@@ -26,6 +32,16 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		//Damage
+		playerDamage = 0;
+		gameController.displayDamage.text = "Damage: "+playerDamage.ToString();
+
+		//Score
+		score = 0;
+		gameController.displayScore.text = "Score: "+score.ToString();
+
+
 		// gameController = GameObject.FindGameObjectWithTag ("GameController");
 		rb2d = GetComponent<Rigidbody2D>();
 
@@ -35,7 +51,12 @@ public class PlayerController : MonoBehaviour {
 
 		currentDirection = new Vector2(0,1.0f);
 		currentSpeed = speed;
-	
+
+		currentShield = gameController.shield;
+		gameController.displayShield.text = "Shield: " +currentShield.ToString();
+
+		currentLives = gameController.lives;
+		gameController.displayLives.text = "Lives: " + currentLives.ToString ();
 	} 
 		
 	// Update is called once per frame
@@ -129,7 +150,7 @@ public class PlayerController : MonoBehaviour {
 			if (gameController.enableQuests) {
 				if ((other.gameObject.name == gameController.currentTargetName) || (other.gameObject.name == gameController.currentTargetName + "(Clone)")) { // to do 
 
-					gameController.IncrementScore ();
+					IncrementScore ();
 					// Is the current target (Quest)
 					//Debug.Log("matches");
 					gameController.NextTarget ();
@@ -156,7 +177,8 @@ public class PlayerController : MonoBehaviour {
 					gameController.playCurrentTargetAudio ();
 
 					// Debug.Log("No match! "+gameController.currentTargetName+" is current target and hit "+other.gameObject.name);
-					gameController.IncrementPlayerDamage ();
+					IncrementPlayerDamage ();
+
 					// Bounce! 
 					transform.Rotate (0, 0, 180);
 
@@ -167,7 +189,7 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				// QUESTS disabled
 
-				gameController.IncrementScore ();
+				IncrementScore ();
 
 				Instantiate (explosion, other.transform.position, other.transform.rotation);
 
@@ -190,6 +212,44 @@ public class PlayerController : MonoBehaviour {
 		} 
 		
 	} // end OnTriggerEnter2D
+
+
+	public void IncrementScore() {
+		score++;
+		gameController.displayScore.text = "Score: "+score.ToString();
+	}
+
+	public void IncrementPlayerDamage() {
+
+		playerDamage++;
+		gameController.displayDamage.text = "Damage: " + playerDamage.ToString ();
+
+		if (!gameController.invincible) {
+
+			currentShield --;
+
+			if (currentShield <= 0) {
+				currentLives--;
+				Instantiate (explosion, transform.position, transform.rotation);
+				explodeAudio.Play ();
+
+				if (currentLives <= 0) {
+					// Game Over
+					Application.LoadLevel (Application.loadedLevel);
+					Debug.Log ("Game Over! - Restart");
+				} else {
+					currentShield = gameController.shield;
+				}
+			}
+
+			// Update Display
+			gameController.displayShield.text = "Shield: " +currentShield.ToString();
+			gameController.displayLives.text = "Lives: " + currentLives.ToString ();
+
+		} else {
+
+		}
+	}
 
 
 } // END class

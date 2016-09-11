@@ -9,6 +9,11 @@ public class GameController : MonoBehaviour {
 	public bool showQuestName = true;
 	public bool targetIndicatorEnabled = true;
 	public bool sayQuestName = true;
+
+	public bool invincible=false;
+	public int lives=3;
+	public int shield=5;
+
 	public int targetsNeededToWin;
 	public GameObject player;
 	public GameObject background;
@@ -20,6 +25,8 @@ public class GameController : MonoBehaviour {
 	public Text displayDamage;
 	public Text displayScore;
 	public Text displayQuestName;
+	public Text displayShield;
+	public Text displayLives;
 
 	private string[] targetNames;
 	public string currentTargetName;
@@ -31,8 +38,7 @@ public class GameController : MonoBehaviour {
 	private GameObject currentTargetObject;
 
 	private float timeTicker;
-	private int playerDamage;
-	private int score;
+
 
 	// Use this for initialization
 	void Start () {
@@ -40,13 +46,7 @@ public class GameController : MonoBehaviour {
 
 		// targetIndicatorEnabled = tossCoin ();
 
-		//Damage
-		playerDamage = 0;
-		displayDamage.text = "Damage: "+playerDamage.ToString();
 
-		//Score
-		score = 0;
-		displayScore.text = "Score: "+score.ToString();
 
 		targetNames = new string[targets.Length];
 
@@ -204,16 +204,7 @@ public class GameController : MonoBehaviour {
 			
 	}
 
-	public void IncrementPlayerDamage() {
-		playerDamage++;
-		displayDamage.text = "Damage: "+playerDamage.ToString();
-	}
 
-
-	public void IncrementScore() {
-		score++;
-		displayScore.text = "Score: "+score.ToString();
-	}
 
 	public bool tossCoin() {
 		float randomNumber = Random.Range (0.0f, 1.0f);
