@@ -122,15 +122,14 @@ MonoBehaviour:
   - {fileID: 1000011782126192, guid: 8283b2723b65c4dc89436adea3e57bbe, type: 2}
   - {fileID: 1000011782126192, guid: f4502b1521c0f4813b98ed0030af3e74, type: 2}
   - {fileID: 1000011782126192, guid: 75a38466e153d4005b1ab9d492bedcfb, type: 2}
-  - {fileID: 1000011782126192, guid: 8fb673963415640b69f04e8a34fc9c4a, type: 2}
-  - {fileID: 1000011782126192, guid: 923dc1f8b50ae441e80bd48c7eb232a7, type: 2}
-  - {fileID: 1000011782126192, guid: 70ed1a1f345ad4b47b45f30c500917b6, type: 2}
   - {fileID: 1000011782126192, guid: 80165cef7d59443a68513c9e6097e085, type: 2}
+  - {fileID: 1000011782126192, guid: 923dc1f8b50ae441e80bd48c7eb232a7, type: 2}
   targetsNeededToWin: 10
   player: {fileID: 1230378368}
   background: {fileID: 683954738}
   targetSets: 10
   halfMapSide: 1024
+  targetIndicatorEnabled: 1
   displayTime: {fileID: 1997646044}
   displayDamage: {fileID: 1649988188}
   displayScore: {fileID: 1059156319}
