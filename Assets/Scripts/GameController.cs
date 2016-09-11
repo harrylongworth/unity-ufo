@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 	public GameObject background;
 	public int targetSets;
 	public int halfMapSide;
+	public bool targetIndicatorEnabled = true;
 
 	public Text displayTime;
 	public Text displayDamage;
@@ -30,6 +31,8 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		startTime = Time.time;
+
+		// targetIndicatorEnabled = tossCoin ();
 
 		//Damage
 		playerDamage = 0;
@@ -67,13 +70,16 @@ public class GameController : MonoBehaviour {
 
 		currentTargetName = targetNames [0];
 		currentTargetIndex = 0;
-		Destroy (currentTargetIndicator);
 		displayTime.text = "Time: 0";
-		currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,1), Quaternion.identity);
-		currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-		currentTargetIndicator.tag = "Indicator";
-		currentTargetIndicator.name = "Indicator";
-		currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,0.0f);
+
+		if (targetIndicatorEnabled) {
+			currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,1), Quaternion.identity);
+			currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+			currentTargetIndicator.tag = "Indicator";
+			currentTargetIndicator.name = "Indicator";
+			currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,0.0f);
+		}
+
 
 	} // END start
 
@@ -148,25 +154,39 @@ public class GameController : MonoBehaviour {
 
 		currentTargetName = targets [currentTargetIndex].name;
 
-		displayTime.text=currentTargetName;
-		currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,1), Quaternion.identity);
-		currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+		// displayTime.text=currentTargetName;
 
-		currentTargetIndicator.tag = "Indicator";
-		currentTargetIndicator.name = "Indicator";
-		currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,0.0f);
+		if (targetIndicatorEnabled) {
+			currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,1), Quaternion.identity);
+			currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 
+			currentTargetIndicator.tag = "Indicator";
+			currentTargetIndicator.name = "Indicator";
+			currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,0.0f);
+
+		}
+			
 	}
 
-	public void incrementPlayerDamage() {
+	public void IncrementPlayerDamage() {
 		playerDamage++;
 		displayDamage.text = "Damage: "+playerDamage.ToString();
 	}
 
 
-	public void incrementScore() {
+	public void IncrementScore() {
 		score++;
 		displayScore.text = "Score: "+score.ToString();
 	}
+
+	public bool tossCoin() {
+		float randomNumber = Random.Range (0.0f, 1.0f);
+		if (randomNumber < 0.5f) {
+			return true;
+		} else {
+			return false;
+		}
+
+	} // end tosscoin
 
 } // FND class
