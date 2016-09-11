@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour {
 	public GameObject explosion;
 	public float centerCalibrate;
 
+	public float shieldSpriteSize=30f;
+	public float smallestShieldSize=5f;
+
 	public int currentShield;
 	public int currentLives;
 
@@ -28,6 +31,10 @@ public class PlayerController : MonoBehaviour {
 	private AudioSource bounceAudio;
 	private Vector2 currentDirection;
 	// private Quaternion playerRotation = Quaternion.identity;
+
+	private GameObject shieldSprite;
+	private float currentShieldSpriteSize;
+	private float changeShieldSpriteBy;
 
 
 	// Use this for initialization
@@ -52,11 +59,33 @@ public class PlayerController : MonoBehaviour {
 		currentDirection = new Vector2(0,1.0f);
 		currentSpeed = speed;
 
-		currentShield = gameController.shield;
-		gameController.displayShield.text = "Shield: " +currentShield.ToString();
+		shieldSprite = GameObject.FindGameObjectWithTag ("Shield");
 
-		currentLives = gameController.lives;
-		gameController.displayLives.text = "Lives: " + currentLives.ToString ();
+		if (gameController.invincible) {
+			
+			gameController.displayShield.enabled = false;
+
+			Destroy (shieldSprite);
+
+			gameController.displayLives.enabled=false;
+
+		} else {
+
+			currentShield = gameController.shield;
+			gameController.displayShield.text = "Shield: " +currentShield.ToString();
+
+			shieldSprite.transform.localScale = new Vector3 (shieldSpriteSize, shieldSpriteSize, 0f);
+			currentShieldSpriteSize = shieldSpriteSize;
+
+			// set the shield sprite size increment 
+			changeShieldSpriteBy = (shieldSpriteSize - smallestShieldSize) / gameController.shield;
+			Debug.Log (changeShieldSpriteBy);
+
+			currentLives = gameController.lives;
+			gameController.displayLives.text = "Lives: " + currentLives.ToString ();
+
+		}
+
 	} 
 		
 	// Update is called once per frame
@@ -228,7 +257,9 @@ public class PlayerController : MonoBehaviour {
 
 			currentShield --;
 
+
 			if (currentShield <= 0) {
+				
 				currentLives--;
 				Instantiate (explosion, transform.position, transform.rotation);
 				explodeAudio.Play ();
@@ -239,8 +270,15 @@ public class PlayerController : MonoBehaviour {
 					Debug.Log ("Game Over! - Restart");
 				} else {
 					currentShield = gameController.shield;
+					currentShieldSpriteSize = shieldSpriteSize;
+			
 				}
+			} else {
+				currentShieldSpriteSize -= changeShieldSpriteBy;
 			}
+
+			// update shieldSprite size
+			shieldSprite.transform.localScale = new Vector3 (currentShieldSpriteSize, currentShieldSpriteSize, 0f);
 
 			// Update Display
 			gameController.displayShield.text = "Shield: " +currentShield.ToString();
