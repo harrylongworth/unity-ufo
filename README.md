@@ -43,15 +43,17 @@ It needs to be fun and pretty.
 * changed way interacts with edge of map so teleports..not sure this is good idea. Also have toggle to go back to bounce off edge
 
 #BACKLOG - Wish List for v0.2:
-* Complete = Release v0.2
+* Complete = Test for Release 
+
+##As a result of testing add scope:
+* add big collision barriers/objects to layout to increase complexity - use as map edge so obvious that are hitting egde of map. Added to scope as is confusing in current configuration (player doesn't know what is happening when hit edge of map).
 
 #FUTURE (Product Backlog):
-* add big collision barriers/objects to layout to increase complexity - use as map edge to introduce player to (=special type of Target)
+
 * add ability to have different target sets (levels) 
 * add additional target/pickup types in additional scenes (colour, shapes, numbers, letters (upper/lower), words, food, furniture, animals, people) + ability for teacher to add / remove from "game"
  - will require refactor of target prefab and work out what to do about audio for each target
 * add option to randomise target order 
-* edge of map objects
 * Game GUI (Pause, Settings, Login/Player Select, Save Progress, results)
 * visual indicator of game over
 * add own background music
