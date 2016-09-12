@@ -236,7 +236,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
 --- !u!82 &255636073
 AudioSource:
   m_ObjectHideFlags: 0
@@ -690,6 +690,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 683954740}
   - 212: {fileID: 683954739}
+  - 114: {fileID: 683954741}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -742,7 +743,27 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
+--- !u!114 &683954741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 683954738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e437f5054eb4ed3a14fd6c352d9be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 2e5282536b160465d9613340b7c834d4, type: 3}
+  - {fileID: 21300000, guid: 398564171cd8f4d959dae16b80ea238e, type: 3}
+  - {fileID: 21300000, guid: a2b1d42082b584bc79e5792f5970a4d4, type: 3}
+  - {fileID: 21300000, guid: 21ea7fc93fecb407b9c1ed960faf66d7, type: 3}
+  - {fileID: 21300000, guid: ee7d328c25e13487a88e95f9d5a3b450, type: 3}
+  - {fileID: 21300000, guid: 3633f16181fde4747a58d49c6ace382f, type: 3}
+  spriteID: 5
+  setSprite: 0
 --- !u!1 &939950704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,7 +1062,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1230378368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,8 +1100,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8a161dc38d71b4a38b60fb75ba402c9b, type: 3}
   - {fileID: 21300000, guid: 87646691a3a6047fdb53b96a7631df11, type: 3}
   - {fileID: 21300000, guid: 6a4b06c372d7743c3a5c7e40340756ca, type: 3}
-  spriteID: 3
-  setSprite: 1
+  spriteID: 1
+  setSprite: 0
   speed: 3
   acceleration: 13
   rotationSpeed: 10
