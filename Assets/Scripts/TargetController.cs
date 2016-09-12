@@ -4,6 +4,7 @@ using System.Collections;
 public class TargetController : MonoBehaviour {
 
 	private GameObject player;
+	public bool bounceOffEdge = false;
 
 	public float maxVelocity = 200f;
 	private Rigidbody2D rb2d;
@@ -66,29 +67,52 @@ public class TargetController : MonoBehaviour {
 		if (isOffMap) {
 			// player.transform.position = Vector3.zero;
 
-			float bounceDistance = 10.0f;
-			float bouncedX = transform.position.x;
-			float bouncedY = transform.position.y;
+			if (bounceOffEdge) {
+				float bounceDistance = 10.0f;
+				float bouncedX = transform.position.x;
+				float bouncedY = transform.position.y;
 
-			// Bounce off
-			if (Mathf.Abs(transform.position.x)>Mathf.Abs(transform.position.y)) 
-			{
-				//bounceDistance = Mathf.Abs(transform.position.x * 0.1f);
-				bouncedX = transform.position.x-Mathf.Sign(transform.position.x)*bounceDistance;
-				rb2d.velocity = new Vector2(-1.0f*rb2d.velocity.x,rb2d.velocity.y);
+				// Bounce off
+				if (Mathf.Abs(transform.position.x)>Mathf.Abs(transform.position.y)) 
+				{
+					//bounceDistance = Mathf.Abs(transform.position.x * 0.1f);
+					bouncedX = transform.position.x-Mathf.Sign(transform.position.x)*bounceDistance;
+					rb2d.velocity = new Vector2(-1.0f*rb2d.velocity.x,rb2d.velocity.y);
 
-			}	else {
-				//bounceDistance = Mathf.Abs(transform.position.y * 0.1f);
-				bouncedY = transform.position.y-Mathf.Sign(transform.position.y)*bounceDistance;
-				// Debug.Log (bouncedY);
-				rb2d.velocity = new Vector2(rb2d.velocity.x,rb2d.velocity.y*-1.0f);
+				}	else {
+					//bounceDistance = Mathf.Abs(transform.position.y * 0.1f);
+					bouncedY = transform.position.y-Mathf.Sign(transform.position.y)*bounceDistance;
+					// Debug.Log (bouncedY);
+					rb2d.velocity = new Vector2(rb2d.velocity.x,rb2d.velocity.y*-1.0f);
+				}
+
+
+				transform.position = new Vector3 (bouncedX, bouncedY, 0.0f);
+
+			} else {
+
+
+				float newX = transform.position.x;
+				float newY = transform.position.y;
+
+				// Bounce off
+				if (Mathf.Abs (transform.position.x) > Mathf.Abs (transform.position.y)) {
+					//bounceDistance = Mathf.Abs(player.transform.position.x * 0.1f);
+					newX = newX*-0.99f;
+				} else {
+					newY = newY * -0.99f;
+				}
+
+				transform.position = new Vector3 (newX, newY, 0.0f);
+
+
 			}
 
 
-			transform.position = new Vector3 (bouncedX, bouncedY, 0.0f);
 
 
-			// transform.Rotate (0, 0, 180);
+
+
 		} 
 
 	}

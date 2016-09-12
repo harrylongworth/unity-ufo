@@ -211,6 +211,7 @@ MonoBehaviour:
   invincible: 0
   lives: 3
   shield: 5
+  bounceOffEdge: 0
   targetsNeededToWin: 10
   player: {fileID: 1230378368}
   background: {fileID: 683954738}
@@ -1101,7 +1102,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 87646691a3a6047fdb53b96a7631df11, type: 3}
   - {fileID: 21300000, guid: 6a4b06c372d7743c3a5c7e40340756ca, type: 3}
   spriteID: 1
-  setSprite: 0
+  setSprite: 1
   speed: 3
   acceleration: 13
   rotationSpeed: 10
