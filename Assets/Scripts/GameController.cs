@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour {
 
 	public GameObject [] targets;
 	public GameObject barrier;
+	public GameObject MovementGUI;
+	public bool paused=false;
 
 	public float edgeSpacing=10f;
 	public bool enableQuests = true;
@@ -31,6 +33,7 @@ public class GameController : MonoBehaviour {
 	public Text displayQuestName;
 	public Text displayShield;
 	public Text displayLives;
+	public Text pauseButton;
 
 	private string[] targetNames;
 	public string currentTargetName;
@@ -43,6 +46,9 @@ public class GameController : MonoBehaviour {
 
 	private float timeTicker;
 
+	private float pausedtime;
+
+	private SimpleTouchPadPlayer touchPad;
 
 	// Use this for initialization
 	void Start () {
@@ -51,6 +57,7 @@ public class GameController : MonoBehaviour {
 		// targetIndicatorEnabled = tossCoin ();
 
 
+		// touchPad = MovementGUI.GetComponent<SimpleTouchPadPlayer> ();
 
 		targetNames = new string[targets.Length];
 
@@ -164,7 +171,24 @@ public class GameController : MonoBehaviour {
 
 	void Update() {
 
-		if (Time.timeScale == 0) {
+		// Detect Pause / Play
+
+		/*
+		Vector2 touchPadPosition = touchPad.GetPosition ();
+		if (touchPadPosition.x > Screen.width * 0.9 / 2 || touchPadPosition.y > Screen.height * 0.9 / 2) {
+
+			Debug.Log ("Paused is" + paused);
+
+			if (paused) {
+				onPlay ();
+			} else { 
+				onPause ();
+			}
+		}
+
+		*/
+
+		if (Time.timeScale == 0 && !paused) {
 			if (Input.anyKeyDown) {
 				Time.timeScale = 1f;
 			}
@@ -325,6 +349,39 @@ public class GameController : MonoBehaviour {
 
 	} // end playCurrent
 
+	public void pressPauseButton() {
+
+		if (paused) {
+			onPlay ();
+		} else { 
+			onPause ();
+		}
+
+	}
+
+	public void onPause() {
+		if (Time.timeScale == 1) {
+				Time.timeScale = 0f;
+		}
+
+		paused = true;
+		pausedtime = Time.time;
+
+		pauseButton.text = "Play";
+
+	}
+
+	public void onPlay() {
+		
+		if (Time.timeScale == 0 || (Time.time-pausedtime>0.3)) {
+			Time.timeScale = 1f;
+		}
+
+		paused = false;
+		pauseButton.text = "Pause";
+
+
+	}
 
 
 } // FND class
