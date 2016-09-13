@@ -29,6 +29,9 @@ public class CameraZoom : MonoBehaviour {
 
 		if (Input.touchCount == 2)
 		{
+
+			// Debug.Log ("Two Touches Detected!");
+
 			// Store both touches.
 			Touch touchZero = Input.GetTouch(0);
 			Touch touchOne = Input.GetTouch(1);
@@ -47,14 +50,21 @@ public class CameraZoom : MonoBehaviour {
 			// If the camera is orthographic...
 			if (camera.orthographic)
 			{
+
+				// Debug.Log ("Zooming Camera");
+
 				// ... change the orthographic size based on the change in distance between the touches.
-				camera.orthographicSize += deltaMagnitudeDiff * touchZoomSpeed;
+				if(deltaMagnitudeDiff <0.1) {ZoomIn();} else {if(deltaMagnitudeDiff >0.1){ZoomOut();}}
+
 
 				// Make sure the orthographic size never drops below zero.
-				camera.orthographicSize = Mathf.Max(camera.orthographicSize, 0.1f);
+				// currentZoom = Mathf.Max(camera.orthographicSize, 0.1f);
 			}
 			else
 			{
+
+				// Not implementing as not used in this game
+
 				/*
 				// Otherwise change the field of view based on the change in distance between the touches.
 				camera.fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
