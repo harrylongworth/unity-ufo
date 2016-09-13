@@ -4,7 +4,7 @@ using System.Collections;
 public class TargetController : MonoBehaviour {
 
 	private GameObject player;
-	public bool bounceOffEdge = false;
+	public bool bounceOffEdge = true;
 
 	public float maxVelocity = 200f;
 	private Rigidbody2D rb2d;
@@ -16,9 +16,14 @@ public class TargetController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rb2d = GetComponent<Rigidbody2D> ();
 
-		rb2d.velocity = Random.insideUnitCircle * Random.Range (0.1f, maxVelocity);
+		if (tag != "Barrier") {
+			rb2d = GetComponent<Rigidbody2D> ();
+
+			rb2d.velocity = Random.insideUnitCircle * Random.Range (0.1f, maxVelocity);
+		}
+
+
 
 
 	}

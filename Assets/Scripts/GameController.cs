@@ -5,6 +5,9 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 
 	public GameObject [] targets;
+	public GameObject barrier;
+
+	public float edgeSpacing=10f;
 	public bool enableQuests = true;
 	public bool showQuestName = true;
 	public bool targetIndicatorEnabled = true;
@@ -58,7 +61,7 @@ public class GameController : MonoBehaviour {
 		float spawnRangeX = spawnRange-borderX;
 		float spawnRangeY = spawnRange-borderY;
 
-
+		// Build Targets
 		for (int i = 0; i < targetSets; i++) {
 			for (int x = 0; x < targets.Length; x++) {
 
@@ -74,6 +77,49 @@ public class GameController : MonoBehaviour {
 				// Debug.Log (targetTemp.name);
 			}
 		} // END for
+
+		// Build Map Edge
+
+		float paddingX = Screen.width / 2;
+		float paddingY = Screen.height / 2;
+
+		float xEdge = halfMapSide - paddingX; 
+		float yEdge = halfMapSide - paddingY;
+
+		int xLoop = (int) Mathf.Round((yEdge * 2) / edgeSpacing); // X loop
+		int yLoop = (int) Mathf.Round(xEdge * 2 / edgeSpacing); // Y loop
+
+ 
+		float currentY=-yEdge;
+
+		for (int i = 0; i < xLoop; i++) {
+
+			Quaternion spawnRotation = Quaternion.identity;
+
+			Vector3 spawnPositionTop = new Vector3 (xEdge,currentY,0.0f);
+			Instantiate (barrier, spawnPositionTop, spawnRotation);
+
+			Vector3 spawnPositionBottom = new Vector3 (-xEdge,currentY,0.0f);
+			Instantiate (barrier, spawnPositionBottom, spawnRotation);
+
+			currentY += edgeSpacing;
+		}
+
+		float currentX=-xEdge;
+
+		for (int i = 0; i < yLoop; i++) {
+
+			Quaternion spawnRotation = Quaternion.identity;
+
+			Vector3 spawnPositionLeft = new Vector3 (currentX,yEdge,0.0f);
+			Instantiate (barrier, spawnPositionLeft, spawnRotation);
+
+			Vector3 spawnPositionRight = new Vector3 (currentX,-yEdge,0.0f);
+			Instantiate (barrier, spawnPositionRight, spawnRotation);
+
+			currentX += edgeSpacing;
+		}
+
 
 		if (enableQuests) {
 
@@ -117,6 +163,13 @@ public class GameController : MonoBehaviour {
 	} // END start
 
 	void Update() {
+
+		if (Time.timeScale == 0) {
+			if (Input.anyKeyDown) {
+				Time.timeScale = 1f;
+			}
+		}
+
 
 		timeTicker = Mathf.Round(Time.time - startTime);
 		displayTime.text = "Time: "+timeTicker.ToString();

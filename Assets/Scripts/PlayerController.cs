@@ -196,6 +196,18 @@ public class PlayerController : MonoBehaviour {
 	{
 		// Debug.Log (other.tag);
 
+
+		if (other.gameObject.CompareTag ("Barrier")) {
+			// Bounce! 
+			transform.Rotate (0, 0, 180);
+
+			bounceAudio.Play ();
+			// Bounce
+
+		}
+
+			
+
 		if (other.gameObject.CompareTag ("Target")) {
 			// other.gameObject.SetActive (false);
 
@@ -221,6 +233,8 @@ public class PlayerController : MonoBehaviour {
 					// CHECK VICTORY conditions
 					if (targetTally > gameController.targetsNeededToWin) {
 						//restart level
+						Time.timeScale=0;
+
 						Application.LoadLevel (Application.loadedLevel);
 						Debug.Log ("RESTART! - Level Complete");
 						// SceneManager.LoadScene (SceneManager.GetActiveScene()); // need to update
@@ -258,8 +272,10 @@ public class PlayerController : MonoBehaviour {
 				// CHECK VICTORY conditions
 				if (targetTally > gameController.targetsNeededToWin) {
 					//restart level
-					Application.LoadLevel (Application.loadedLevel);
+					Time.timeScale=0;
 					Debug.Log ("RESTART! - Level Complete");
+					Application.LoadLevel (Application.loadedLevel);
+
 					// SceneManager.LoadScene (SceneManager.GetActiveScene()); // need to update
 
 				}
@@ -281,18 +297,19 @@ public class PlayerController : MonoBehaviour {
 		gameController.displayDamage.text = "Damage: " + playerDamage.ToString ();
 
 		if (!gameController.invincible) {
-
+			
 			currentShield --;
 
 
 			if (currentShield <= 0) {
-				
+				// Time.timeScale=0;
 				currentLives--;
 				Instantiate (explosion, transform.position, transform.rotation);
 				explodeAudio.Play ();
 
 				if (currentLives <= 0) {
 					// Game Over
+					Time.timeScale=0;
 					Application.LoadLevel (Application.loadedLevel);
 					Debug.Log ("Game Over! - Restart");
 				} else {
