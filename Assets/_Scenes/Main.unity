@@ -780,6 +780,7 @@ GameObject:
   - 92: {fileID: 939950707}
   - 124: {fileID: 939950706}
   - 81: {fileID: 939950705}
+  - 114: {fileID: 939950710}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -855,6 +856,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &939950710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 939950704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9685f074e747d4769887e067adf5dbe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraZoomRange: {x: 50, y: 200}
+  zoomBy: 3
+  zoomByMouse: 10
+  touchZoomSpeed: 0.5
 --- !u!114 &939950711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1106,7 +1122,7 @@ MonoBehaviour:
   spriteID: 1
   setSprite: 0
   speed: 3
-  acceleration: 13
+  acceleration: 20
   rotationSpeed: 10
   gameController: {fileID: 255636071}
   touchPadCenter: {fileID: 1720622507}
