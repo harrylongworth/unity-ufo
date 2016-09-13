@@ -1291,11 +1291,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 1230378372}
   - 114: {fileID: 1230378369}
+  - 114: {fileID: 1230378376}
   - 212: {fileID: 1230378371}
   - 50: {fileID: 1230378370}
   - 58: {fileID: 1230378373}
   - 82: {fileID: 1230378374}
   - 82: {fileID: 1230378375}
+  - 114: {fileID: 1230378377}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1559,6 +1561,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1230378376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1230378368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d2d38d1504744b9b240ba60eb0e285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceByTags:
+  - Barrier
+  - Target
+  delayBetweenChecks: 0.1
+  enableBouncing: 1
+--- !u!114 &1230378377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1230378368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fbabb10f1e21471e9aecab3ab7d86bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  halfMapSide: 1024
 --- !u!1 &1363532463
 GameObject:
   m_ObjectHideFlags: 0

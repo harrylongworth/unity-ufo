@@ -74,7 +74,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 13.430592
+  m_Radius: 9.693744
 --- !u!82 &82000010392726228
 AudioSource:
   m_ObjectHideFlags: 1
@@ -160,7 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7448efd000f974f66a48b0227da428ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceOffEdge: 0
   maxVelocity: 200
   targetName: 
   isIndicator: 0

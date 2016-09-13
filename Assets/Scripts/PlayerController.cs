@@ -202,14 +202,7 @@ public class PlayerController : MonoBehaviour {
 		// Debug.Log (other.tag);
 
 
-		if (other.gameObject.CompareTag ("Barrier")) {
-			// Bounce! 
-			transform.Rotate (0, 0, 180);
 
-			bounceAudio.Play ();
-			// Bounce
-
-		}
 
 			
 
@@ -255,9 +248,9 @@ public class PlayerController : MonoBehaviour {
 					IncrementPlayerDamage ();
 
 					// Bounce! 
-					transform.Rotate (0, 0, 180);
+					// transform.Rotate (0, 0, 180);
 
-					bounceAudio.Play ();
+					// bounceAudio.Play ();
 
 				} // END pickup if
 

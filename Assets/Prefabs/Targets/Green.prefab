@@ -24,6 +24,8 @@ GameObject:
   - 50: {fileID: 50000011276874154}
   - 114: {fileID: 114000011170444772}
   - 82: {fileID: 82000014040914958}
+  - 114: {fileID: 114000011222198886}
+  - 114: {fileID: 114000013750874700}
   m_Layer: 0
   m_Name: Green
   m_TagString: Target
@@ -57,7 +59,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -160,10 +162,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7448efd000f974f66a48b0227da428ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceOffEdge: 1
   maxVelocity: 200
   targetName: 
   isIndicator: 0
+--- !u!114 &114000011222198886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011782126192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d2d38d1504744b9b240ba60eb0e285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceByTags:
+  - Barrier
+  - Player
+  - Target
+  delayBetweenChecks: 0.1
+  enableBouncing: 1
+--- !u!114 &114000013750874700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011782126192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fbabb10f1e21471e9aecab3ab7d86bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  halfMapSide: 1024
 --- !u!212 &212000012329566942
 SpriteRenderer:
   m_ObjectHideFlags: 1

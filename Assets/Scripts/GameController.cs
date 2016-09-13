@@ -93,8 +93,8 @@ public class GameController : MonoBehaviour {
 		float xEdge = halfMapSide - paddingX; 
 		float yEdge = halfMapSide - paddingY;
 
-		int xLoop = (int) Mathf.Round((yEdge * 2) / edgeSpacing); // X loop
-		int yLoop = (int) Mathf.Round(xEdge * 2 / edgeSpacing); // Y loop
+		int xLoop = (int) Mathf.Round((yEdge * 2) / edgeSpacing)+1; // X loop
+		int yLoop = (int) Mathf.Round(xEdge * 2 / edgeSpacing)+1; // Y loop
 
  
 		float currentY=-yEdge;
@@ -156,6 +156,7 @@ public class GameController : MonoBehaviour {
 				currentTargetIndicator.tag = "Indicator";
 				currentTargetIndicator.name = "Indicator";
 				currentTargetIndicator.transform.localScale = new Vector3 (0.5f, 0.5f, 0.0f);
+				currentTargetIndicator.GetComponent<BounceByTags> ().bounceByTags = null;
 			} 
 
 
@@ -198,75 +199,8 @@ public class GameController : MonoBehaviour {
 		timeTicker = Mathf.Round(Time.time - startTime);
 		displayTime.text = "Time: "+timeTicker.ToString();
 
-		CatchOffMap ();
 	} // END Update
 
-	void CatchOffMap () {
-
-		float borderX = Screen.width / 2;
-		float borderY = Screen.height / 2;
-		float maxBackgroundDim = 0.0f;
-		bool isOffMap=false;
-		float absPlayerX = Mathf.Abs (player.transform.position.x);
-		float absPlayerY = Mathf.Abs (player.transform.position.y);
-
-
-		if (absPlayerX > absPlayerY) {
-			//X Direction
-			maxBackgroundDim = halfMapSide - borderX; // add a border around edge
-			if(absPlayerX>maxBackgroundDim) {isOffMap=true;}
-	
-		} else {
-			// Y Direction
-			maxBackgroundDim = halfMapSide - borderY;
-			if(absPlayerY>maxBackgroundDim) {isOffMap=true;}
-		}
-			
-		if (isOffMap) {
-
-			if (bounceOffEdge) {
-				// player.transform.position = Vector3.zero;
-
-				float bounceDistance = 10.0f;
-				float bouncedX = player.transform.position.x;
-				float bouncedY = player.transform.position.y;
-
-				// Bounce off
-				if (Mathf.Abs (player.transform.position.x) > Mathf.Abs (player.transform.position.y)) {
-					//bounceDistance = Mathf.Abs(player.transform.position.x * 0.1f);
-					bouncedX = player.transform.position.x - Mathf.Sign (player.transform.position.x) * bounceDistance;
-
-				} else {
-					//bounceDistance = Mathf.Abs(player.transform.position.y * 0.1f);
-					bouncedY = player.transform.position.y - Mathf.Sign (player.transform.position.y) * bounceDistance;
-					// Debug.Log (bouncedY);
-				}
-
-
-				player.transform.position = new Vector3 (bouncedX, bouncedY, 0.0f);
-				player.transform.Rotate (0, 0, 180);
-
-			} else {
-
-				float newX = player.transform.position.x;
-				float newY = player.transform.position.y;
-
-				// Bounce off
-				if (Mathf.Abs (player.transform.position.x) > Mathf.Abs (player.transform.position.y)) {
-					//bounceDistance = Mathf.Abs(player.transform.position.x * 0.1f);
-					newX = newX*-0.99f;
-				} else {
-					newY = newY * -0.99f;
-				}
-
-				player.transform.position = new Vector3 (newX, newY, 0.0f);
-
-			}
-
-
-		} 
-
-	}
 
 		
 	public string[] GetTargetNames() {
@@ -293,6 +227,7 @@ public class GameController : MonoBehaviour {
 			currentTargetIndicator.tag = "Indicator";
 			currentTargetIndicator.name = "Indicator";
 			currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,0.0f);
+			currentTargetIndicator.GetComponent<BounceByTags> ().bounceByTags = null;
 
 		}
 
