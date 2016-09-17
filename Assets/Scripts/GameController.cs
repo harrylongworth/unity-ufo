@@ -151,11 +151,11 @@ public class GameController : MonoBehaviour {
 			// targets[currentTargetIndex].GetComponent<AudioSource>().Play();
 
 			if (targetIndicatorEnabled) {
-				currentTargetIndicator = (GameObject)Instantiate (targets [currentTargetIndex], new Vector3 (20, 20, 1), Quaternion.identity);
+				currentTargetIndicator = (GameObject)Instantiate (targets [currentTargetIndex], new Vector3 (20, 20, 2), Quaternion.identity);
 				currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 				currentTargetIndicator.tag = "Indicator";
 				currentTargetIndicator.name = "Indicator";
-				currentTargetIndicator.transform.localScale = new Vector3 (0.5f, 0.5f, 0.0f);
+				currentTargetIndicator.transform.localScale = new Vector3 (0.5f, 0.5f, 1.0f);
 				currentTargetIndicator.GetComponent<BounceByTags> ().bounceByTags = null;
 			} 
 
@@ -221,12 +221,12 @@ public class GameController : MonoBehaviour {
 		// displayTime.text=currentTargetName;
 
 		if (targetIndicatorEnabled) {
-			currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,1), Quaternion.identity);
+			currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,2), Quaternion.identity);
 			currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 
 			currentTargetIndicator.tag = "Indicator";
 			currentTargetIndicator.name = "Indicator";
-			currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,0.0f);
+			currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,1.0f);
 			currentTargetIndicator.GetComponent<BounceByTags> ().bounceByTags = null;
 
 		}
