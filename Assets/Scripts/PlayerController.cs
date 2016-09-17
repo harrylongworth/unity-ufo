@@ -201,11 +201,6 @@ public class PlayerController : MonoBehaviour {
 	{
 		// Debug.Log (other.tag);
 
-
-
-
-			
-
 		if (other.gameObject.CompareTag ("Target")) {
 			// other.gameObject.SetActive (false);
 
@@ -250,7 +245,7 @@ public class PlayerController : MonoBehaviour {
 					// Bounce! 
 					// transform.Rotate (0, 0, 180);
 
-					// bounceAudio.Play ();
+					bounceAudio.Play ();
 
 				} // END pickup if
 
