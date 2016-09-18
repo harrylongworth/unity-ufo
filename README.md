@@ -12,7 +12,7 @@ The game will have different levels of increasing difficulty with the inital goa
 
 It needs to be fun and pretty.
 
-#Version 0.2 [ Current Dev Branch ]
+#Version 0.2 [ Complete - see v0.2 Branch ]
 
 #DONE so far:
 * Replace artwork with temporary art as not sure on the rights issues there. ie background, player and asteroid (Pickup)
@@ -41,7 +41,8 @@ It needs to be fun and pretty.
 * added shield with visual indicator
 * added life and end of game based on all lifes used
 * changed way interacts with edge of map so teleports..not sure this is good idea. Also have toggle to go back to bounce off edge
-
+* Zoom in / out (by pinch & mouse)
+ 
 #BACKLOG - Wish List for v0.2:
 * Complete = Test for Release 
 
@@ -59,7 +60,7 @@ It needs to be fun and pretty.
 * add own background music
 * although will start with visual & aural match, go to next scene (shapes pickups) on completion and then return to level 1 on completion of all levels (scenes) and then switch to just aural to confirm learning
 * Solar system based progression for theme for each scene (start at earth or sun?) or other space picture background progression from the NASA archives. 
-* Zoom in / out (by pinch & slider?)
+
 * Home base that grows as you collect (for freeplay version has respawn when add to base) - possiblity of drag back to base config (need to work out how to do towing)
 
 #MULTI PLAYER
