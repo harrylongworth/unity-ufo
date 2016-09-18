@@ -43,7 +43,7 @@ public class CheckNotOffMap : MonoBehaviour {
 
 		if (isOffMap) {
 
-			Debug.Log (name+" with tag "+tag+"is off map");
+			// Debug.Log (name+" with tag "+tag+"is off map");
 				// player.transform.position = Vector3.zero;
 
 				float bounceDistance = 10.0f;

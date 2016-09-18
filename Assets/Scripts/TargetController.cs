@@ -31,7 +31,7 @@ public class TargetController : MonoBehaviour {
 
 		if (tag == "Indicator") {
 			player = GameObject.FindGameObjectWithTag ("Player");
-			offset = new Vector3(0.5f,-1*(Screen.height/2)*0.15f,5.0f);
+			offset = new Vector3(0.5f,+1*(Screen.height/2)*0.3f,5.0f);
 
 			// offset = new Vector3(-1*(Screen.width/2)*0.6f,-1*(Screen.height/2)*0.6f,0.0f);
 			// offset = Vector3.zero;

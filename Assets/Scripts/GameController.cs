@@ -302,7 +302,7 @@ public class GameController : MonoBehaviour {
 		paused = true;
 		pausedtime = Time.time;
 
-		pauseButton.text = "Play";
+		pauseButton.text = ">";
 
 	}
 
@@ -313,7 +313,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		paused = false;
-		pauseButton.text = "Pause";
+		pauseButton.text = "| |";
 
 
 	}
