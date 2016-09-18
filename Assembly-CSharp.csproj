@@ -48,11 +48,18 @@
      <Compile Include="Assets\Completed\Scripts\CompleteCameraController.cs" />
      <Compile Include="Assets\Completed\Scripts\CompletePlayerController.cs" />
      <Compile Include="Assets\Completed\Scripts\CompleteRotator.cs" />
-     <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\FirstProgram.cs" />
+     <Compile Include="Assets\Scripts\BackgroundController.cs" />
+     <Compile Include="Assets\Scripts\BounceByTags.cs" />
+     <Compile Include="Assets\Scripts\CameraZoom.cs" />
+     <Compile Include="Assets\Scripts\CheckNotOffMap.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\PixelPerfectCamera.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Rotator.cs" />
-     <Compile Include="Assets\Scripts\SimpleTouchPad.cs" />
+     <Compile Include="Assets\Scripts\SimpleTouchPadPlayer.cs" />
+     <Compile Include="Assets\Scripts\TargetController.cs" />
+     <Compile Include="Assets\Scripts\TileMap.cs" />
+     <None Include="Assets\explosionsoundslite\readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

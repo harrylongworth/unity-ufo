@@ -4,7 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Indicator
+  - Target
+  - Player
   - PickUp
+  - Shield
+  - Barrier
   layers:
   - Default
   - TransparentFX
