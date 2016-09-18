@@ -12,16 +12,76 @@ The game will have different levels of increasing difficulty with the inital goa
 
 It needs to be fun and pretty.
 
-#Version 0.2 [ Current Dev Branch ]
+#Version 0.3 
+[ Current Dev Branch starting 18 Sept 2016]
 
-#DONE so far:
+#DONE
+* nil
+
+#TO DO 
+
+* sprite manager 
+- current sprite, setbyname
+- apply to background, player and then targets etc
+
+* scenery objects that don't collide with anything but the edge (moon, Mars, comet) 
+* Add hazards (crash not bounce) & toggle on/off
+* add additional target/pickup types as "levels" in the scene (colour, shapes, numbers, letters (upper/lower), words, food, furniture, animals, people) 
+
+ - will require refactor of target prefab and work out what to do about audio for each target
+* add option to randomise target order 
+
+* moving as a behaviour - on/off toggle (apply to targets and other - start moving / stop moving)
+* rotating as a behaviour - on/off toggle (apply to targets and others latter - start moving / stop moving)
+* fade in and out (glow) as a behaviour - use for player death and maybe targets
+* Variable size on creation as a behaviour - apply to targets & hazards 
+* better indication of player death (flash & stand still for sec) 
+
+* Add "windows" for bettew GUI - Pause, Settings, Login/Player Select, Save Progress, results/highscore
+  -  visual indicator of game over
+  -  ability for teacher to add / remove levels from "game"
+  -  new game allows level selection (or random = dice, and repeat a level = loop, rather than go on to next)
+* add own background music (with toggle on/off)
+* ability to set see, hear or read quests (any or all)
+* background changes - Solar system based progression for theme for each scene (start at earth or sun?) or other space picture background progression from the NASA archives. 
+
+##BONUS:
+* add Tractor beam based shooting
+* Add enemies who protect an area (new distribution approach) 
+-reset you back to start
+- slower so can escape (speed =Min speed)  
+& shoot on/off
+
+#FUTURE: (Product Backlog):
+
+##MULTI PLAYER - v0.4?
+* add ability to have multiple players either in team or as competitors
+* bounce off each other?
+* tails? particularly of colourfull M n M's would look good.
+* base build mode (colours/types equate to different resource types)
+* Home base grows as you collect (for freeplay version has respawn when add to base) - possiblity of drag back to base config (need to work out how to do towing)
+* infinite play (i.e as collect an object it is recreated)
+* 
+##TRACKING
+* ability to switch between players (login)
+* use unity services to students, score, progress, metrics
+
+#DISTRIBUTING & UPDATING 
+* how does Unity support patching? We will publish through Teacher Virus initially as a WebGL
+* How does publishing through Teacher virus effect future ownership disputes etc.
+
+---
+
+#History - 
+
+##Version 0.2 
+- Completed 17 Sept 2016
+
 * Replace artwork with temporary art as not sure on the rights issues there. ie background, player and asteroid (Pickup)
 * Change so randomly generates pickups of the quantity as set by a parameter
 * changed the map size
 * changed the edge of the map so visually you see the background all the way to the edge of the screen and then bounce off an invisible "edge"
 * Game now restarts automatically when you have collected a proportion of the total pickups
-
-##Done as of 12 Sept (Sprint Start: 8 Sept)
 * different backgrounds with the ability (via Unity config) to have a fixed one or select at random
 * change way player works so has constant velocity in direction pointed(doesn't slow down). (ie mass of 0 and drag of 0?) and doesn't spin. 
 * change player controller so is touch screen where you want player to steer to
@@ -41,43 +101,10 @@ It needs to be fun and pretty.
 * added shield with visual indicator
 * added life and end of game based on all lifes used
 * changed way interacts with edge of map so teleports..not sure this is good idea. Also have toggle to go back to bounce off edge
-
-#BACKLOG - Wish List for v0.2:
-* Complete = Test for Release 
-
-##As a result of testing add scope:
 * add big collision barriers/objects to layout to increase complexity - use as map edge so obvious that are hitting egde of map. Added to scope as is confusing in current configuration (player doesn't know what is happening when hit edge of map).
-
-#FUTURE (Product Backlog):
-
-* add ability to have different target sets (levels) 
-* add additional target/pickup types in additional scenes (colour, shapes, numbers, letters (upper/lower), words, food, furniture, animals, people) + ability for teacher to add / remove from "game"
- - will require refactor of target prefab and work out what to do about audio for each target
-* add option to randomise target order 
-* Game GUI (Pause, Settings, Login/Player Select, Save Progress, results)
-* visual indicator of game over
-* add own background music
-* although will start with visual & aural match, go to next scene (shapes pickups) on completion and then return to level 1 on completion of all levels (scenes) and then switch to just aural to confirm learning
-* Solar system based progression for theme for each scene (start at earth or sun?) or other space picture background progression from the NASA archives. 
 * Zoom in / out (by pinch & slider?)
-* Home base that grows as you collect (for freeplay version has respawn when add to base) - possiblity of drag back to base config (need to work out how to do towing)
 
-#MULTI PLAYER
-* add ability to have multiple players either in team or as competitors
-* bounce off each other?
-* tails? particularly of colourfull M n M's would look good.
-* base build mode (colours/types equate to different resource types)
-
-#TRACKING
-* use unity services to students, score, progress, metrics
-
-#DISTRIBUTING & UPDATING 
-* how does Unity support patching? We will publish through Teacher Virus initially as a WebGL
-* How does publishing through Teacher virus effect future ownership disputes etc.
-
----
-
-#History - 
+--
 
 ##Version 0.1
 Additions to the base UFO Tutorial code as follows:
