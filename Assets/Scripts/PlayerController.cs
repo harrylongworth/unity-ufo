@@ -3,9 +3,10 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public Sprite[] sprites;
-	public int spriteID = 0;
-	public bool setSprite = false;
+	// public Sprite[] sprites;
+	// public int spriteID = 0;
+	// public bool setSprite = false;
+
 	public float speed;
 	public float acceleration;
 	public float rotationSpeed;
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		/*
 		//Set Sprites
 		Sprite currentSprite;
 
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour {
 
 		renderer.sprite = currentSprite;
 
+		*/
 
 		//Damage
 		playerDamage = 0;

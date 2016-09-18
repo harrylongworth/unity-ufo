@@ -49,11 +49,11 @@
      <Compile Include="Assets\Completed\Scripts\CompletePlayerController.cs" />
      <Compile Include="Assets\Completed\Scripts\CompleteRotator.cs" />
      <Compile Include="Assets\FirstProgram.cs" />
-     <Compile Include="Assets\Scripts\BackgroundController.cs" />
      <Compile Include="Assets\Scripts\BounceByTags.cs" />
      <Compile Include="Assets\Scripts\CameraZoom.cs" />
      <Compile Include="Assets\Scripts\CheckNotOffMap.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\Managers\SpriteManager.cs" />
      <Compile Include="Assets\Scripts\PixelPerfectCamera.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\SimpleTouchPadPlayer.cs" />
