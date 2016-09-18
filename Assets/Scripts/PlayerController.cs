@@ -31,8 +31,10 @@ public class PlayerController : MonoBehaviour {
 	private int playerDamage;
 	private int score;
 
-	private AudioSource explodeAudio;
-	private AudioSource bounceAudio;
+	// private AudioSource explodeAudio;
+	// private AudioSource bounceAudio;
+	private AudioClipManager audioClipManager;
+
 	private Vector2 currentDirection;
 	// private Quaternion playerRotation = Quaternion.identity;
 
@@ -82,9 +84,12 @@ public class PlayerController : MonoBehaviour {
 		// gameController = GameObject.FindGameObjectWithTag ("GameController");
 		rb2d = GetComponent<Rigidbody2D>();
 
+		/*
 		AudioSource[] tempAudio = GetComponents<AudioSource> ();
 		explodeAudio = tempAudio[0];
 		bounceAudio = tempAudio [1];
+*/
+		audioClipManager = GetComponent<AudioClipManager> ();
 
 		currentDirection = new Vector2(0,1.0f);
 		currentSpeed = speed;
@@ -222,7 +227,9 @@ public class PlayerController : MonoBehaviour {
 					Instantiate (explosion, other.transform.position, other.transform.rotation);
 
 					Destroy (other.gameObject);
-					explodeAudio.Play ();
+
+					audioClipManager.PlayClip (0);
+					// explodeAudio.Play ();
 
 					targetTally++;
 
@@ -248,7 +255,8 @@ public class PlayerController : MonoBehaviour {
 					// Bounce! 
 					// transform.Rotate (0, 0, 180);
 
-					bounceAudio.Play ();
+					audioClipManager.PlayClip (1);
+					// bounceAudio.Play ();
 
 				} // END pickup if
 
@@ -261,7 +269,8 @@ public class PlayerController : MonoBehaviour {
 
 				Destroy (other.gameObject);
 
-				explodeAudio.Play ();
+				audioClipManager.PlayClip (1);
+				// explodeAudio.Play ();
 
 				targetTally++;
 
@@ -301,7 +310,10 @@ public class PlayerController : MonoBehaviour {
 				// Time.timeScale=0;
 				currentLives--;
 				Instantiate (explosion, transform.position, transform.rotation);
-				explodeAudio.Play ();
+
+
+				//explodeAudio.Play ();
+				audioClipManager.PlayClip (0);
 
 				if (currentLives <= 0) {
 					// Game Over

@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\CameraZoom.cs" />
      <Compile Include="Assets\Scripts\CheckNotOffMap.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\Managers\AudioClipManager.cs" />
      <Compile Include="Assets\Scripts\Managers\SpriteManager.cs" />
      <Compile Include="Assets\Scripts\PixelPerfectCamera.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
