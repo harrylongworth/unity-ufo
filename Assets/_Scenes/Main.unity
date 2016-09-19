@@ -194,6 +194,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapEdge: {fileID: 1000011782126192, guid: 3bd9747a5dd5f4b04b2d3e4b956034e6, type: 2}
+  player: {fileID: 1230378368}
+  background: {fileID: 683954738}
   MovementGUI: {fileID: 1720622505}
   paused: 0
   enableQuests: 1
@@ -206,9 +208,7 @@ MonoBehaviour:
   bounceOffEdge: 1
   targetsNeededToWin: 10
   targetSetsNeededToWin: 2
-  player: {fileID: 1230378368}
-  background: {fileID: 683954738}
-  targetSets: 15
+  targetSets: 5
   halfMapSide: 1024
   displayTime: {fileID: 1997646044}
   displayDamage: {fileID: 1649988188}
@@ -319,9 +319,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets:
+  - {fileID: 1000010075821040, guid: 74881a2b4f53c45a9a6d933416f44683, type: 2}
   - {fileID: 1000010176926216, guid: edfdcba09916746e7adf1f8c5f9cd840, type: 2}
-  - {fileID: 1000010176926216, guid: edfdcba09916746e7adf1f8c5f9cd840, type: 2}
-  - {fileID: 1000010176926216, guid: edfdcba09916746e7adf1f8c5f9cd840, type: 2}
+  - {fileID: 1000011261312646, guid: e532ae5743bfe4dd19d0995bcdef6332, type: 2}
+  - {fileID: 1000012879068082, guid: ac842bc8a7c93488aacb83c3541285b7, type: 2}
   currentLevel: 0
   targetSets: 3
 --- !u!1 &452694099

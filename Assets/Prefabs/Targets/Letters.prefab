@@ -64,7 +64,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58000010944041890
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -189,7 +189,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578ad574a117441dbb94c9f94df62391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites: []
+  sprites:
+  - {fileID: 21300000, guid: 25aed101196314379a026109c5888017, type: 3}
+  - {fileID: 21300000, guid: d0ddf9715323b4491aaa2bb9c65153fb, type: 3}
+  - {fileID: 21300000, guid: 18e45d22ec5cd4bfeb06940120133c21, type: 3}
+  - {fileID: 21300000, guid: 9a39b142e46c24caeaf0b60bae7f829d, type: 3}
+  - {fileID: 21300000, guid: 2c1fd3e34f6c04326ad199546ec926e1, type: 3}
+  - {fileID: 21300000, guid: 68b662343237d4c3db2a59d5aa24259f, type: 3}
+  - {fileID: 21300000, guid: 6da74d744a6894460a67bae81a18011a, type: 3}
+  - {fileID: 21300000, guid: 7e489707552d8481f96800daf32768e4, type: 3}
+  - {fileID: 21300000, guid: dc8d7a4738193431695f614e0d08d8c2, type: 3}
+  - {fileID: 21300000, guid: f820cea865deb4c8891bb2355291a338, type: 3}
+  - {fileID: 21300000, guid: 82550e5a4ea494e0bb3cacc572d6ab98, type: 3}
+  - {fileID: 21300000, guid: 2cffb3eb7ba2e4c5db0d6176347a80b0, type: 3}
+  - {fileID: 21300000, guid: ca588d4cdee4f426da11c2d13ef1f3dc, type: 3}
+  - {fileID: 21300000, guid: d6ce53bc423d44e169e867ae8ddf5c05, type: 3}
+  - {fileID: 21300000, guid: 970a501d376324ed3a735a14866483b9, type: 3}
+  - {fileID: 21300000, guid: d416227e5f6b943ec8d3c8a1be39e0cd, type: 3}
+  - {fileID: 21300000, guid: 11a7347eba2ca471b9f7986c78ec883a, type: 3}
+  - {fileID: 21300000, guid: 3a53a1aefed75429d9ae09a4c290a16b, type: 3}
+  - {fileID: 21300000, guid: 9dd8d42f66d1a4e96a4916ec3267256c, type: 3}
+  - {fileID: 21300000, guid: 29b8947050ee14fc58055e45910f7b48, type: 3}
+  - {fileID: 21300000, guid: f0991a41c4ae34f32b1507cd90f9d701, type: 3}
+  - {fileID: 21300000, guid: 1aee07d34d90843da9de3963fba178e3, type: 3}
+  - {fileID: 21300000, guid: 68c624e5bd4784ea8a11b87b512a7095, type: 3}
+  - {fileID: 21300000, guid: 148db626a0d3a40bf9d5ed1f5571a195, type: 3}
+  - {fileID: 21300000, guid: 57f82926953e94fa0a4f53585be4bcd2, type: 3}
+  - {fileID: 21300000, guid: 84e72c8d6586442d08e2f606fde013c2, type: 3}
   spriteID: 0
   setSprite: 0
 --- !u!114 &114000013196635568
@@ -253,6 +279,6 @@ SpriteRenderer:
   m_SortingLayerID: -892047999
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.97794116, g: 0, b: 0.87003034, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.966}
   m_FlipX: 0
   m_FlipY: 0
