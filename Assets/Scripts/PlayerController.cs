@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour {
 				} else {
 					// Not the current target
 
-					gameController.playCurrentTargetAudio ();
+					// gameController.PlayCurrentTargetAudio ();
 
 					// Debug.Log("No match! "+gameController.currentTargetName+" is current target and hit "+other.gameObject.name);
 					IncrementPlayerDamage ();

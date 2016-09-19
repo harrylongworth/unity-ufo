@@ -22,13 +22,11 @@ GameObject:
   - 212: {fileID: 212000012329566942}
   - 58: {fileID: 58000012891715558}
   - 50: {fileID: 50000011276874154}
-  - 114: {fileID: 114000011170444772}
-  - 82: {fileID: 82000014040914958}
-  - 114: {fileID: 114000011222198886}
-  - 114: {fileID: 114000013750874700}
+  - 82: {fileID: 82000010392726228}
+  - 114: {fileID: 114000012944901302}
   m_Layer: 0
-  m_Name: Green
-  m_TagString: Target
+  m_Name: MapEdge
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,9 +37,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011782126192}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,7 +57,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -76,8 +74,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 13.430592
---- !u!82 &82000014040914958
+  m_Radius: 9.693744
+--- !u!82 &82000010392726228
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -86,7 +84,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2afeeacf7e1144a7f94eed029205cce9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c04f72e8465b94ce6bf389494572782c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.306
   m_Pitch: 1
@@ -151,7 +149,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114000011170444772
+--- !u!114 &114000012944901302
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -159,41 +157,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011782126192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7448efd000f974f66a48b0227da428ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 549e1f88ff8e74b49856ff439272cfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 200
-  targetName: 
-  isIndicator: 0
---- !u!114 &114000011222198886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011782126192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44d2d38d1504744b9b240ba60eb0e285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounceByTags:
-  - Barrier
-  - Player
-  - Target
-  delayBetweenChecks: 0.1
-  enableBouncing: 1
---- !u!114 &114000013750874700
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011782126192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fbabb10f1e21471e9aecab3ab7d86bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  halfMapSide: 1024
+  edgeSpacing: 80
 --- !u!212 &212000012329566942
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -223,7 +190,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -892047999
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6d6d4dc1a21e348b3895d43ecc98905b, type: 3}
-  m_Color: {r: 0, g: 0.97794116, b: 0.047211036, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 191c2345db7674daba05dcff288377ad, type: 3}
+  m_Color: {r: 0.9239858, g: 0.97794116, b: 0.972, a: 1}
   m_FlipX: 0
   m_FlipY: 0

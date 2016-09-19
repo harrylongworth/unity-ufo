@@ -4,12 +4,13 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-	public GameObject [] targets;
-	public GameObject barrier;
+	// public GameObject [] targets;
+	public GameObject mapEdge;
+	private GameObject[] mapEdgeObjects = null;
+
 	public GameObject MovementGUI;
 	public bool paused=false;
 
-	public float edgeSpacing=10f;
 	public bool enableQuests = true;
 	public bool showQuestName = true;
 	public bool targetIndicatorEnabled = true;
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour {
 	public GameObject player;
 	public GameObject background;
 	public int targetSets;
-	public int halfMapSide;
+	public int halfMapSide=1024;
 
 
 	public Text displayTime;
@@ -39,98 +40,26 @@ public class GameController : MonoBehaviour {
 	public string currentTargetName;
 	public int currentTargetIndex;
 	private GameObject currentTargetIndicator;
-	private float startTime;
 
 	private GameObject targetTemp;
 	private GameObject currentTargetObject;
 
-	private float timeTicker;
 
 	private float pausedtime;
 
 	private SimpleTouchPadPlayer touchPad;
 
+	private GameObject[] targets;
+
 	// Use this for initialization
 	void Start () {
-		startTime = Time.time;
-
-		// targetIndicatorEnabled = tossCoin ();
 
 
-		// touchPad = MovementGUI.GetComponent<SimpleTouchPadPlayer> ();
-
-		targetNames = new string[targets.Length];
-
-		float borderX = Screen.width / 2;
-		float borderY = Screen.height / 2;
-		// halfMapSide = (int)background
-		int spawnRange = (int) Mathf.Round(halfMapSide*0.9f);
-		float spawnRangeX = spawnRange-borderX;
-		float spawnRangeY = spawnRange-borderY;
-
-		// Build Targets
-		for (int i = 0; i < targetSets; i++) {
-			for (int x = 0; x < targets.Length; x++) {
-
-				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnRangeX, spawnRangeX), Random.Range (-spawnRangeY, spawnRangeY),0.0f);
-				Quaternion spawnRotation = Quaternion.identity;
-				targetTemp = (GameObject) Instantiate (targets[x], spawnPosition, spawnRotation);
-				if (i == 0) {
-					targetNames[x]=targets[x].name;
-					// targetNames [x] = targetTemp.name;
-					// Debug.Log (targetNames[x]);
-					// Debug.Log (targetTemp.name);
-				} 
-				// Debug.Log (targetTemp.name);
-			}
-		} // END for
-
-		// Build Map Edge
-
-		float paddingX = Screen.width / 2;
-		float paddingY = Screen.height / 2;
-
-		float xEdge = halfMapSide - paddingX; 
-		float yEdge = halfMapSide - paddingY;
-
-		int xLoop = (int) Mathf.Round((yEdge * 2) / edgeSpacing)+1; // X loop
-		int yLoop = (int) Mathf.Round(xEdge * 2 / edgeSpacing)+1; // Y loop
-
- 
-		float currentY=-yEdge;
-
-		for (int i = 0; i < xLoop; i++) {
-
-			Quaternion spawnRotation = Quaternion.identity;
-
-			Vector3 spawnPositionTop = new Vector3 (xEdge,currentY,0.0f);
-			Instantiate (barrier, spawnPositionTop, spawnRotation);
-
-			Vector3 spawnPositionBottom = new Vector3 (-xEdge,currentY,0.0f);
-			Instantiate (barrier, spawnPositionBottom, spawnRotation);
-
-			currentY += edgeSpacing;
-		}
-
-		float currentX=-xEdge;
-
-		for (int i = 0; i < yLoop; i++) {
-
-			Quaternion spawnRotation = Quaternion.identity;
-
-			Vector3 spawnPositionLeft = new Vector3 (currentX,yEdge,0.0f);
-			Instantiate (barrier, spawnPositionLeft, spawnRotation);
-
-			Vector3 spawnPositionRight = new Vector3 (currentX,-yEdge,0.0f);
-			Instantiate (barrier, spawnPositionRight, spawnRotation);
-
-			currentX += edgeSpacing;
-		}
-
+		NewGame ();
 
 		if (enableQuests) {
 
-
+			/*
 			currentTargetObject = targets [0];
 
 			playCurrentTargetAudio ();
@@ -158,7 +87,7 @@ public class GameController : MonoBehaviour {
 				currentTargetIndicator.transform.localScale = new Vector3 (0.5f, 0.5f, 1.0f);
 				currentTargetIndicator.GetComponent<BounceByTags> ().bounceByTags = null;
 			} 
-
+*/
 
 		} else {
 			displayQuestName.enabled = false;
@@ -172,32 +101,13 @@ public class GameController : MonoBehaviour {
 
 	void Update() {
 
-		// Detect Pause / Play
-
-		/*
-		Vector2 touchPadPosition = touchPad.GetPosition ();
-		if (touchPadPosition.x > Screen.width * 0.9 / 2 || touchPadPosition.y > Screen.height * 0.9 / 2) {
-
-			Debug.Log ("Paused is" + paused);
-
-			if (paused) {
-				onPlay ();
-			} else { 
-				onPause ();
-			}
-		}
-
-		*/
-
+		// Restart from Pause if currently paused and no longer paused 
 		if (Time.timeScale == 0 && !paused) {
 			if (Input.anyKeyDown) {
 				Time.timeScale = 1f;
 			}
 		}
 
-
-		timeTicker = Mathf.Round(Time.time - startTime);
-		displayTime.text = "Time: "+timeTicker.ToString();
 
 	} // END Update
 
@@ -209,7 +119,10 @@ public class GameController : MonoBehaviour {
 
 	public void NextTarget () {
 
+
 		currentTargetIndex++;
+
+		/*
 		if (currentTargetIndex > targets.Length-1) {
 			currentTargetIndex = 0;
 		} 
@@ -234,12 +147,13 @@ public class GameController : MonoBehaviour {
 		playCurrentTargetAudio ();
 
 		displayQuestName.text = currentTargetName;
-			
+			*/
+
 	}
 
 
 
-	public bool tossCoin() {
+	public bool TossCoin() {
 		float randomNumber = Random.Range (0.0f, 1.0f);
 		if (randomNumber < 0.5f) {
 			return true;
@@ -249,8 +163,9 @@ public class GameController : MonoBehaviour {
 
 	} // end tosscoin
 
-	public void playCurrentTargetAudio() {
+	public void PlayCurrentTargetAudio() {
 
+		/*
 		if (sayQuestName) {
 			// Debug.Log ("Play Audio?");
 
@@ -262,6 +177,7 @@ public class GameController : MonoBehaviour {
 
 		}
 
+*/
 		//  BELOW should work but doesn't :( so try adding audio direct to Game Controller
 
 		//AudioSource tempAudio = targets[currentTargetIndex].GetComponent<AudioSource> ();
@@ -287,7 +203,7 @@ public class GameController : MonoBehaviour {
 	public void pressPauseButton() {
 
 		if (paused) {
-			onPlay ();
+			OnPlay ();
 		} else { 
 			onPause ();
 		}
@@ -306,7 +222,7 @@ public class GameController : MonoBehaviour {
 
 	}
 
-	public void onPlay() {
+	public void OnPlay() {
 		
 		if (Time.timeScale == 0 || (Time.time-pausedtime>0.3)) {
 			Time.timeScale = 1f;
@@ -318,5 +234,28 @@ public class GameController : MonoBehaviour {
 
 	}
 
+	public void NewGame() {
+		
+		NewLevel ();
+	}
+
+	public void NewLevel() {
+		displayTime.GetComponent<TimeTicker> ().ResetTicker (); 
+
+
+		// MAP EDGE:
+		// Delete previous map edge if exists
+		if (mapEdgeObjects != null) {
+			foreach (GameObject item in mapEdgeObjects) {
+
+				GameObject.Destroy (item);
+			}
+
+		} // END if
+
+		// Spawn Map Edge
+		mapEdgeObjects = mapEdge.GetComponent<MapEdgeController> ().Spawn (halfMapSide);
+
+	} // END NewLevel
 
 } // FND class

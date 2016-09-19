@@ -15,8 +15,11 @@ public class AudioClipManager : MonoBehaviour {
 
 		source = GetComponent<AudioSource> ();
 
-		currentClip = clips [clipID ];
-		source.clip = currentClip;	
+		if (clips.Length > 0) {
+			currentClip = clips [clipID];
+			source.clip = currentClip;
+		}
+	
 	}
 	
 

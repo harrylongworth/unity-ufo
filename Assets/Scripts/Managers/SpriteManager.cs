@@ -34,7 +34,7 @@ public class SpriteManager : MonoBehaviour {
 	}
 	
 
-	void SetSpriteByID(int id) {
+	public void SetSpriteByID(int id) {
 
 		if (id < sprites.Length) {
 			spriteID = id;
@@ -55,7 +55,7 @@ public class SpriteManager : MonoBehaviour {
 		return spriteID;
 	}
 
-	void Update () {
-	
+	public int GetLength() {
+		return sprites.Length;
 	}
 }

@@ -16,13 +16,9 @@ public class TargetController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if (tag != "Barrier") {
-			rb2d = GetComponent<Rigidbody2D> ();
+		rb2d = GetComponent<Rigidbody2D> ();
 
-			rb2d.velocity = Random.insideUnitCircle * Random.Range (0.1f, maxVelocity);
-		}
-
-
+		rb2d.velocity = Random.insideUnitCircle * Random.Range (0.1f, maxVelocity);
 
 
 	}
@@ -42,9 +38,44 @@ public class TargetController : MonoBehaviour {
 			transform.position = player.transform.position + offset;
 			// transform.position = player.transform.position;
 		} 
-			
+
 	} // END Update
 
+	public GameObject [] spawn(int setsToSpawn,float halfMapSide) {
 
+
+		float borderX = Screen.width / 2;
+		float borderY = Screen.height / 2;
+		// halfMapSide = (int)background
+		int spawnRange = (int) Mathf.Round(halfMapSide*0.9f);
+		float spawnRangeX = spawnRange-borderX;
+		float spawnRangeY = spawnRange-borderY;
+
+		int spriteCount = GetComponent<SpriteManager> ().GetLength ();
+		int totalObjects = setsToSpawn * spriteCount;
+			
+		GameObject[] objectArray = new GameObject[totalObjects];
+		int arrayCounter = 0;
+
+		// Build Targets
+		for (int i = 0; i < setsToSpawn; i++) {
+			for (int x = 0; x < spriteCount; x++) {
+
+				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnRangeX, spawnRangeX), Random.Range (-spawnRangeY, spawnRangeY),0.0f);
+				Quaternion spawnRotation = Quaternion.identity;
+				var targetTemp = (GameObject) Instantiate (gameObject, spawnPosition, spawnRotation);
+				targetTemp.name = x.ToString();
+				targetTemp.GetComponent<SpriteManager> ().SetSpriteByID (x);
+
+				objectArray [arrayCounter] = targetTemp;
+				arrayCounter++;
+
+				// Debug.Log (targetTemp.name);
+			}
+		} // END for
+
+		return objectArray;
+
+	}
 
 }
