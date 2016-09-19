@@ -205,6 +205,7 @@ MonoBehaviour:
   shield: 5
   bounceOffEdge: 1
   targetsNeededToWin: 10
+  targetSetsNeededToWin: 2
   player: {fileID: 1230378368}
   background: {fileID: 683954738}
   targetSets: 15
@@ -218,6 +219,7 @@ MonoBehaviour:
   pauseButton: {fileID: 452694101}
   currentTargetName: 
   currentTargetIndex: 0
+  currentLevel: 0
 --- !u!4 &255636072
 Transform:
   m_ObjectHideFlags: 0
@@ -318,11 +320,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
   - {fileID: 1000010176926216, guid: edfdcba09916746e7adf1f8c5f9cd840, type: 2}
-  - {fileID: 1000010075821040, guid: 74881a2b4f53c45a9a6d933416f44683, type: 2}
-  - {fileID: 1000011261312646, guid: e532ae5743bfe4dd19d0995bcdef6332, type: 2}
+  - {fileID: 1000010176926216, guid: edfdcba09916746e7adf1f8c5f9cd840, type: 2}
+  - {fileID: 1000010176926216, guid: edfdcba09916746e7adf1f8c5f9cd840, type: 2}
   currentLevel: 0
   targetSets: 3
-  halfMapSide: 1024
 --- !u!1 &452694099
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,8 +994,13 @@ MonoBehaviour:
   centerCalibrate: 5
   shieldSpriteSize: 2.5
   smallestShieldSize: 0.01
+  initialShield: 5
+  initialLives: 3
   currentShield: 0
   currentLives: 0
+  targetTally: 0
+  playerDamage: 0
+  score: 0
 --- !u!50 &1230378370
 Rigidbody2D:
   serializedVersion: 2

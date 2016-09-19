@@ -3,20 +3,27 @@ using System.Collections;
 
 public class MapEdgeController : MonoBehaviour {
 
-	public float edgeSpacing=80f;
+	public static GameObject[] mapEdgeObjects;
+	public static float edgeSpacing=80f;
 
-	// Use this for initialization
-	void Start () {
-	
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public static void DestroyAll () {
+		
+		if (mapEdgeObjects != null) {
+			foreach (GameObject item in mapEdgeObjects) {
 
-	public GameObject[] Spawn(int halfMapSide) {
+				GameObject.Destroy (item);
+			}
+
+		} // END if
+	
+	} // END DestroyAll
+
+	public static void Spawn(int halfMapSide, GameObject mapEdge) {
+
+		// Clean up any existing objects
+		MapEdgeController.DestroyAll ();
+
 
 		// Build Map Edge
 
@@ -42,11 +49,13 @@ public class MapEdgeController : MonoBehaviour {
 			Quaternion spawnRotation = Quaternion.identity;
 
 			Vector3 spawnPositionTop = new Vector3 (xEdge,currentY,0.0f);
-			objectsArray[arrayPointer] = (GameObject) Instantiate (gameObject, spawnPositionTop, spawnRotation);
+			objectsArray[arrayPointer] = (GameObject) Instantiate (mapEdge, spawnPositionTop, spawnRotation);
+			objectsArray [arrayPointer].name = "MapEdge" + arrayPointer.ToString ();
 			arrayPointer++;
 
 			Vector3 spawnPositionBottom = new Vector3 (-xEdge,currentY,0.0f);
-			objectsArray[arrayPointer] = (GameObject) Instantiate (gameObject, spawnPositionBottom, spawnRotation);
+			objectsArray[arrayPointer] = (GameObject) Instantiate (mapEdge, spawnPositionBottom, spawnRotation);
+			objectsArray [arrayPointer].name = "MapEdge" + arrayPointer.ToString ();
 			arrayPointer++;
 
 			currentY += edgeSpacing;
@@ -59,16 +68,18 @@ public class MapEdgeController : MonoBehaviour {
 			Quaternion spawnRotation = Quaternion.identity;
 
 			Vector3 spawnPositionLeft = new Vector3 (currentX,yEdge,0.0f);
-			objectsArray[arrayPointer] = (GameObject) Instantiate (gameObject, spawnPositionLeft, spawnRotation);
+			objectsArray[arrayPointer] = (GameObject) Instantiate (mapEdge, spawnPositionLeft, spawnRotation);
+			objectsArray [arrayPointer].name = "MapEdge" + arrayPointer.ToString ();
 			arrayPointer++;
 
 			Vector3 spawnPositionRight = new Vector3 (currentX,-yEdge,0.0f);
-			objectsArray[arrayPointer] = (GameObject) Instantiate (gameObject, spawnPositionRight, spawnRotation);
+			objectsArray[arrayPointer] = (GameObject) Instantiate (mapEdge, spawnPositionRight, spawnRotation);
+			objectsArray [arrayPointer].name = "MapEdge" + arrayPointer.ToString ();
 			arrayPointer++;
 
 			currentX += edgeSpacing;
 		}
 
-		return objectsArray;
-	}
-}
+	} // END Spawn
+
+} // END Class

@@ -4,6 +4,7 @@ using System.Collections;
 public class SpriteManager : MonoBehaviour {
 
 	public Sprite[] sprites;
+
 	public int spriteID = 0;
 	public bool setSprite = false;
 
@@ -41,8 +42,13 @@ public class SpriteManager : MonoBehaviour {
 		} else {
 			spriteID = 0;
 		}
-
+			
 		currentSprite = sprites [spriteID ];
+
+		if (renderer == null) {
+			renderer = GetComponent<SpriteRenderer> ();
+		}
+
 		renderer.sprite = currentSprite;
 
 	}
@@ -58,4 +64,21 @@ public class SpriteManager : MonoBehaviour {
 	public int GetLength() {
 		return sprites.Length;
 	}
+
+	public string GetName(int spriteIndex) {
+		return sprites [spriteIndex].name;
+	}
+
+	public void SetSpriteRandom() {
+		
+		int randomSpriteID = (int)Mathf.Round (Random.Range (0, sprites.Length));
+		spriteID = randomSpriteID; 
+
+		currentSprite = sprites [spriteID];
+
+		renderer = GetComponent<SpriteRenderer> ();
+
+		renderer.sprite = currentSprite;
+	}// END SetSpriteRandom
+
 }

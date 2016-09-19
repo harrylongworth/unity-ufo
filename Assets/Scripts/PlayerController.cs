@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 	// public bool setSprite = false;
 
 	public float speed;
+
 	public float acceleration;
 	public float rotationSpeed;
 	public GameController gameController;
@@ -19,17 +20,19 @@ public class PlayerController : MonoBehaviour {
 	public float shieldSpriteSize=30f;
 	public float smallestShieldSize=5f;
 
+	public int initialShield = 5;
+	public int initialLives = 3;
 	public int currentShield;
 	public int currentLives;
 
 	private float currentSpeed;
 	private Rigidbody2D rb2d;
 	private Transform playerPosition;
-	private int targetTally;
+	public int targetTally;
 
 
-	private int playerDamage;
-	private int score;
+	public int playerDamage;
+	public int score;
 
 	// private AudioSource explodeAudio;
 	// private AudioSource bounceAudio;
@@ -217,7 +220,7 @@ public class PlayerController : MonoBehaviour {
 			// Debug.Log (other.gameObject.name);
 
 			if (gameController.enableQuests) {
-				if ((other.gameObject.name == gameController.currentTargetName) || (other.gameObject.name == gameController.currentTargetName + "(Clone)")) { // to do 
+				if (other.gameObject.name == gameController.currentTargetIndex.ToString()) { // to do 
 
 					IncrementScore ();
 					// Is the current target (Quest)
@@ -238,7 +241,9 @@ public class PlayerController : MonoBehaviour {
 						//restart level
 						Time.timeScale=0;
 
-						Application.LoadLevel (Application.loadedLevel);
+						gameController.currentLevel++;
+						gameController.NewLevel ();
+						// Application.LoadLevel (Application.loadedLevel);
 						Debug.Log ("RESTART! - Level Complete");
 						// SceneManager.LoadScene (SceneManager.GetActiveScene()); // need to update
 
@@ -279,7 +284,10 @@ public class PlayerController : MonoBehaviour {
 					//restart level
 					Time.timeScale=0;
 					Debug.Log ("RESTART! - Level Complete");
-					Application.LoadLevel (Application.loadedLevel);
+
+					gameController.currentLevel++;
+					gameController.NewLevel ();
+					// Application.LoadLevel (Application.loadedLevel);
 
 					// SceneManager.LoadScene (SceneManager.GetActiveScene()); // need to update
 
@@ -318,7 +326,10 @@ public class PlayerController : MonoBehaviour {
 				if (currentLives <= 0) {
 					// Game Over
 					Time.timeScale=0;
-					Application.LoadLevel (Application.loadedLevel);
+
+					gameController.NewGame ();
+
+					// Application.LoadLevel (Application.loadedLevel);
 					Debug.Log ("Game Over! - Restart");
 				} else {
 					currentShield = gameController.shield;
@@ -341,5 +352,27 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void NewLevel() {
+		// Set Random player icon
+		GetComponent<SpriteManager> ().SetSpriteRandom ();
+		targetTally = 0;
 
+	}
+
+	public void NewGame() {
+
+		targetTally = 0;
+		score = 0;
+		gameController.displayScore.text = "Score: "+score.ToString();
+
+		playerDamage = 0;
+		gameController.displayDamage.text = "Damage: " + playerDamage.ToString ();
+
+		currentShield = initialShield;
+		gameController.displayShield.text = "Shield: " +currentShield.ToString();
+
+		currentLives = initialLives;
+		gameController.displayLives.text = "Lives: " + currentLives.ToString ();
+
+	}
 } // END class

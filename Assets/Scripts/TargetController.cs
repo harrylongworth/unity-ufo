@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TargetController : MonoBehaviour {
 
+	public static GameObject [] objectArray;
 	private GameObject player;
 
 
@@ -12,6 +13,19 @@ public class TargetController : MonoBehaviour {
 	public bool isIndicator=false;
 
 	private Vector3 offset;
+
+
+	public static void DestroyAll () {
+
+		if (objectArray != null) {
+			foreach (GameObject item in objectArray) {
+
+				GameObject.Destroy (item);
+			}
+
+		} // END if
+
+	} // END DestroyAll
 
 	// Use this for initialization
 	void Start () {
@@ -41,8 +55,9 @@ public class TargetController : MonoBehaviour {
 
 	} // END Update
 
-	public GameObject [] spawn(int setsToSpawn,float halfMapSide) {
+	public static void Spawn(int setsToSpawn,float halfMapSide, GameObject targetType) {
 
+		TargetController.DestroyAll (); 
 
 		float borderX = Screen.width / 2;
 		float borderY = Screen.height / 2;
@@ -51,19 +66,19 @@ public class TargetController : MonoBehaviour {
 		float spawnRangeX = spawnRange-borderX;
 		float spawnRangeY = spawnRange-borderY;
 
-		int spriteCount = GetComponent<SpriteManager> ().GetLength ();
+		int spriteCount = targetType.GetComponent<SpriteManager> ().GetLength ();
 		int totalObjects = setsToSpawn * spriteCount;
 			
-		GameObject[] objectArray = new GameObject[totalObjects];
+		objectArray = new GameObject[totalObjects];
 		int arrayCounter = 0;
 
 		// Build Targets
 		for (int i = 0; i < setsToSpawn; i++) {
 			for (int x = 0; x < spriteCount; x++) {
 
-				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnRangeX, spawnRangeX), Random.Range (-spawnRangeY, spawnRangeY),0.0f);
+				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnRangeX, spawnRangeX), Random.Range (-spawnRangeY, spawnRangeY),1.0f);
 				Quaternion spawnRotation = Quaternion.identity;
-				var targetTemp = (GameObject) Instantiate (gameObject, spawnPosition, spawnRotation);
+				GameObject targetTemp = (GameObject) Instantiate (targetType, spawnPosition, spawnRotation);
 				targetTemp.name = x.ToString();
 				targetTemp.GetComponent<SpriteManager> ().SetSpriteByID (x);
 
@@ -74,8 +89,13 @@ public class TargetController : MonoBehaviour {
 			}
 		} // END for
 
-		return objectArray;
-
 	}
 
+	public int GetLength() {
+		return GetComponent<SpriteManager> ().GetLength ();
+	}
+
+	public string GetName(int currentTargetIndex) {
+		return GetComponent<SpriteManager> ().GetName (currentTargetIndex);
+	}
 }

@@ -6,7 +6,8 @@ public class GameController : MonoBehaviour {
 
 	// public GameObject [] targets;
 	public GameObject mapEdge;
-	private GameObject[] mapEdgeObjects = null;
+	public GameObject player;
+	public GameObject background;
 
 	public GameObject MovementGUI;
 	public bool paused=false;
@@ -22,8 +23,9 @@ public class GameController : MonoBehaviour {
 
 	public bool bounceOffEdge = false;
 	public int targetsNeededToWin;
-	public GameObject player;
-	public GameObject background;
+	public int targetSetsNeededToWin = 1;
+
+
 	public int targetSets;
 	public int halfMapSide=1024;
 
@@ -39,62 +41,25 @@ public class GameController : MonoBehaviour {
 	private string[] targetNames;
 	public string currentTargetName;
 	public int currentTargetIndex;
+
 	private GameObject currentTargetIndicator;
 
-	private GameObject targetTemp;
-	private GameObject currentTargetObject;
+	private TargetManager targetManager;
 
+	private GameObject targetTemp;
 
 	private float pausedtime;
 
 	private SimpleTouchPadPlayer touchPad;
 
-	private GameObject[] targets;
+	public int currentLevel = 0;
+	private GameObject currentTarget;
 
 	// Use this for initialization
 	void Start () {
-
+		targetManager = GetComponent<TargetManager> ();
 
 		NewGame ();
-
-		if (enableQuests) {
-
-			/*
-			currentTargetObject = targets [0];
-
-			playCurrentTargetAudio ();
-
-			currentTargetName = targetNames [0];
-
-			if (showQuestName) {
-				displayQuestName.enabled = true;
-			} else {
-				displayQuestName.enabled = false;
-			}
-
-			displayQuestName.text = currentTargetName;
-
-			currentTargetIndex = 0;
-			displayTime.text = "Time: 0";
-
-			// targets[currentTargetIndex].GetComponent<AudioSource>().Play();
-
-			if (targetIndicatorEnabled) {
-				currentTargetIndicator = (GameObject)Instantiate (targets [currentTargetIndex], new Vector3 (20, 20, 2), Quaternion.identity);
-				currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-				currentTargetIndicator.tag = "Indicator";
-				currentTargetIndicator.name = "Indicator";
-				currentTargetIndicator.transform.localScale = new Vector3 (0.5f, 0.5f, 1.0f);
-				currentTargetIndicator.GetComponent<BounceByTags> ().bounceByTags = null;
-			} 
-*/
-
-		} else {
-			displayQuestName.enabled = false;
-
-			displayDamage.enabled = false;
-		}		// END enableQuests is true
-
 
 
 	} // END start
@@ -113,42 +78,36 @@ public class GameController : MonoBehaviour {
 
 
 		
-	public string[] GetTargetNames() {
-		return targetNames;
-	}
-
 	public void NextTarget () {
 
 
 		currentTargetIndex++;
 
-		/*
-		if (currentTargetIndex > targets.Length-1) {
+		var currentTarget = targetManager.GetTarget(currentLevel);
+
+		if (currentTargetIndex > currentTarget.GetComponent<TargetController>().GetLength()-1) {
 			currentTargetIndex = 0;
 		} 
 
-		currentTargetObject = targets [currentTargetIndex];
-		currentTargetName = currentTargetObject.name;
-
-		// targets [currentTargetIndex].GetComponent<AudioSource>().Play();
-		// displayTime.text=currentTargetName;
+		currentTargetName = currentTarget.GetComponent<TargetController>().GetName (currentTargetIndex);
 
 		if (targetIndicatorEnabled) {
-			currentTargetIndicator = (GameObject) Instantiate (targets[currentTargetIndex], new Vector3(20,20,2), Quaternion.identity);
+			currentTargetIndicator = (GameObject) Instantiate (currentTarget, new Vector3(20,20,2), Quaternion.identity);
 			currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 
 			currentTargetIndicator.tag = "Indicator";
 			currentTargetIndicator.name = "Indicator";
 			currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,1.0f);
 			currentTargetIndicator.GetComponent<BounceByTags> ().bounceByTags = null;
+			currentTargetIndicator.GetComponent<SpriteManager> ().SetSpriteByID (currentTargetIndex);
 
 		}
 
-		playCurrentTargetAudio ();
-
 		displayQuestName.text = currentTargetName;
-			*/
 
+		// To Do
+		//**********************
+		// playCurrentTargetAudio ();
 	}
 
 
@@ -235,26 +194,56 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void NewGame() {
-		
+
+		currentLevel=0;
+		player.GetComponent<PlayerController>().NewGame();
+
 		NewLevel ();
+
+
 	}
 
 	public void NewLevel() {
+		currentTargetIndex = 0;
+			
+		if (currentLevel > targetManager.GetLength ()) {
+			currentLevel = 0;
+		}
+
 		displayTime.GetComponent<TimeTicker> ().ResetTicker (); 
 
+		// Set Random Background
+		background.GetComponent<SpriteManager> ().SetSpriteRandom ();
 
-		// MAP EDGE:
-		// Delete previous map edge if exists
-		if (mapEdgeObjects != null) {
-			foreach (GameObject item in mapEdgeObjects) {
+		player.GetComponent<PlayerController>().NewLevel();
 
-				GameObject.Destroy (item);
-			}
-
-		} // END if
 
 		// Spawn Map Edge
-		mapEdgeObjects = mapEdge.GetComponent<MapEdgeController> ().Spawn (halfMapSide);
+		MapEdgeController.Spawn (halfMapSide,mapEdge);
+
+		var currentTarget = targetManager.GetTarget(currentLevel);
+
+		TargetController.Spawn (targetSets,halfMapSide,currentTarget);
+
+		if (enableQuests) {
+			targetsNeededToWin = ((currentTarget.GetComponent<TargetController>().GetLength ()-1) * targetSetsNeededToWin)+1;
+
+			currentTargetIndex --;
+			NextTarget ();
+
+			if (showQuestName) {
+				displayQuestName.enabled = true;
+			} else {
+				displayQuestName.enabled = false;
+			}
+
+			displayTime.text = "Time: 0";
+
+		} else {
+			displayQuestName.enabled = false;
+
+			displayDamage.enabled = false;
+		}		// END enableQuests is true
 
 	} // END NewLevel
 

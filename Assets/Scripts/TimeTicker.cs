@@ -8,13 +8,10 @@ public class TimeTicker : MonoBehaviour {
 	public float timeTicker;
 
 	private float startTime;
-	private Text displayText;
 
 	// Use this for initialization
 	void Start () {
 
-		displayText = GetComponent<Text> ();
-		
 		startTime = Time.time;
 	}
 	
@@ -22,7 +19,7 @@ public class TimeTicker : MonoBehaviour {
 	void Update () {
 	
 		timeTicker = Mathf.Round(Time.time - startTime);
-		displayText.text = "Time:  "+timeTicker.ToString();
+		gameObject.GetComponent<Text>().text = "Time:  "+timeTicker.ToString();
 	}
 
 	public void ResetTicker () {
