@@ -215,8 +215,8 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Target")) {
 			// other.gameObject.SetActive (false);
 
-			// string message = gameController.currentTargetName + " is current target and hit " + other.gameObject.name;
-			// Debug.Log (message);
+			string message = gameController.currentTargetIndex + " is current target and hit " + other.gameObject.name;
+			Debug.Log (message);
 			// Debug.Log (other.gameObject.name);
 
 			if (gameController.enableQuests) {

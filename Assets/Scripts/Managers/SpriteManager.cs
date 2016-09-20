@@ -81,4 +81,7 @@ public class SpriteManager : MonoBehaviour {
 		renderer.sprite = currentSprite;
 	}// END SetSpriteRandom
 
+	public Sprite GetSpriteByID(int id) {
+		return sprites [id];
+	}
 }

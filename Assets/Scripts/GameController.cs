@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
 	public int targetSets;
 	public int halfMapSide=1024;
 
-
+	public Image questIndicator;
 	public Text displayTime;
 	public Text displayDamage;
 	public Text displayScore;
@@ -92,15 +92,7 @@ public class GameController : MonoBehaviour {
 		currentTargetName = currentTarget.GetComponent<TargetController>().GetName (currentTargetIndex);
 
 		if (targetIndicatorEnabled) {
-			currentTargetIndicator = (GameObject) Instantiate (currentTarget, new Vector3(20,20,2), Quaternion.identity);
-			currentTargetIndicator.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-
-			currentTargetIndicator.tag = "Indicator";
-			currentTargetIndicator.name = "Indicator";
-			currentTargetIndicator.transform.localScale = new Vector3(0.5f,0.5f,1.0f);
-			currentTargetIndicator.GetComponent<BounceByTags> ().bounceByTags = null;
-			currentTargetIndicator.GetComponent<SpriteManager> ().SetSpriteByID (currentTargetIndex);
-
+			questIndicator.GetComponent<QuestIndicatorController>().SetImage(currentTarget.GetComponent<TargetController>().GetSprite(currentTargetIndex));
 		}
 
 		displayQuestName.text = currentTargetName;

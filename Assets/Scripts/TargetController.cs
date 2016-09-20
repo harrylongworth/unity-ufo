@@ -98,4 +98,8 @@ public class TargetController : MonoBehaviour {
 	public string GetName(int currentTargetIndex) {
 		return GetComponent<SpriteManager> ().GetName (currentTargetIndex);
 	}
+
+	public Sprite GetSprite(int currentTargetIndex) {
+		return GetComponent<SpriteManager> ().GetSpriteByID(currentTargetIndex);
+	}
 }
