@@ -85,7 +85,9 @@ public class TargetController : MonoBehaviour {
 				objectArray [arrayCounter] = targetTemp;
 				arrayCounter++;
 
-				// Debug.Log (targetTemp.name);
+				// string debugMessage = "Sprite " + targetTemp.GetComponent<SpriteRenderer> ().sprite.name + " issued ID " + targetTemp.name;
+				// Debug.Log (debugMessage);
+
 			}
 		} // END for
 

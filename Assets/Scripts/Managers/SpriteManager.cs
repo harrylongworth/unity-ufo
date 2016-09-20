@@ -16,7 +16,7 @@ public class SpriteManager : MonoBehaviour {
 
 		renderer = GetComponent<SpriteRenderer> ();
 
-
+		/*
 		if (setSprite) {
 			if (spriteID > (sprites.Length)) {			
 				spriteID = 0;
@@ -31,7 +31,7 @@ public class SpriteManager : MonoBehaviour {
 
 		currentSprite = sprites [spriteID ];
 		renderer.sprite = currentSprite;
-	
+	*/
 	}
 	
 
