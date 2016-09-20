@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7448efd000f974f66a48b0227da428ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableQuestIndicator: 0
   maxVelocity: 200
   targetName: 
   isIndicator: 0

@@ -4,6 +4,8 @@ using System.Collections;
 public class TargetController : MonoBehaviour {
 
 	public static GameObject [] objectArray;
+	public bool disableQuestIndicator = true;
+
 	private GameObject player;
 
 

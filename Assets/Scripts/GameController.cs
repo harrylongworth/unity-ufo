@@ -94,8 +94,11 @@ public class GameController : MonoBehaviour {
 
 		currentTargetName = currentTarget.GetComponent<TargetController>().GetName (currentTargetIndex);
 
-		if (targetIndicatorEnabled) {
-			questIndicator.GetComponent<QuestIndicatorController>().SetImage(currentTarget.GetComponent<TargetController>().GetSprite(currentTargetIndex));
+		if (targetIndicatorEnabled && !currentTarget.GetComponent<TargetController> ().disableQuestIndicator) {
+			questIndicator.gameObject.SetActive (true);
+			questIndicator.GetComponent<QuestIndicatorController> ().SetImage (currentTarget.GetComponent<TargetController> ().GetSprite (currentTargetIndex));
+		} else {
+			questIndicator.gameObject.SetActive (false);
 		}
 
 		displayQuestName.text = currentTargetName;

@@ -283,7 +283,7 @@ MonoBehaviour:
   shield: 5
   bounceOffEdge: 1
   targetsNeededToWin: 10
-  targetSetsNeededToWin: 2
+  targetSetsNeededToWin: 1
   targetSets: 5
   halfMapSide: 1024
   questIndicator: {fileID: 377198865}
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.991}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.959}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
