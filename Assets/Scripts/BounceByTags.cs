@@ -35,7 +35,7 @@ public class BounceByTags : MonoBehaviour {
 						if (other.gameObject.CompareTag (bounceByTags [i])) {
 							// Bounce! 
 
-							Bounce (gameObject, 50f);
+							Bounce (gameObject, 10f);
 
 							lastBounceTime = Time.time;
 

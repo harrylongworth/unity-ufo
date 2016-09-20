@@ -49,82 +49,11 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		/*
-		//Set Sprites
-		Sprite currentSprite;
-
-
-
-		if (setSprite) {
-			if (spriteID < (sprites.Length)) {			
-				currentSprite = sprites [spriteID];
-			} else {
-				currentSprite = sprites [0];
-			}
-
-		} else {
-			// select random sprite
-			int randomSpriteID = (int) Mathf.Round(Random.Range(0,sprites.Length));
-			currentSprite = sprites [randomSpriteID ];
-		}
-
-
-		var renderer = GetComponent<SpriteRenderer> ();
-
-		renderer.sprite = currentSprite;
-
-		*/
-
-		//Damage
-		playerDamage = 0;
-		gameController.displayDamage.text = "Damage: "+playerDamage.ToString();
-
-		//Score
-		score = 0;
-		gameController.displayScore.text = "Score: "+score.ToString();
-
-
-		// gameController = GameObject.FindGameObjectWithTag ("GameController");
 		rb2d = GetComponent<Rigidbody2D>();
 
-		/*
-		AudioSource[] tempAudio = GetComponents<AudioSource> ();
-		explodeAudio = tempAudio[0];
-		bounceAudio = tempAudio [1];
-*/
 		audioClipManager = GetComponent<AudioClipManager> ();
 
-		currentDirection = new Vector2(0,1.0f);
-		currentSpeed = speed;
-
-		shieldSprite = GameObject.FindGameObjectWithTag ("Shield");
-
-		if (gameController.invincible) {
-			
-			gameController.displayShield.enabled = false;
-
-			Destroy (shieldSprite);
-
-			gameController.displayLives.enabled=false;
-
-		} else {
-
-			currentShield = gameController.shield;
-			gameController.displayShield.text = "Shield: " +currentShield.ToString();
-
-			shieldSprite.transform.localScale = new Vector3 (shieldSpriteSize, shieldSpriteSize, 0f);
-			currentShieldSpriteSize = shieldSpriteSize;
-
-			// set the shield sprite size increment 
-			changeShieldSpriteBy = (shieldSpriteSize - smallestShieldSize) / gameController.shield;
-			// Debug.Log (changeShieldSpriteBy);
-
-			currentLives = gameController.lives;
-			gameController.displayLives.text = "Lives: " + currentLives.ToString ();
-
-		}
-
-	} 
+	} // END Start
 		
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -357,6 +286,8 @@ public class PlayerController : MonoBehaviour {
 		GetComponent<SpriteManager> ().SetSpriteRandom ();
 		targetTally = 0;
 
+
+
 	}
 
 	public void NewGame() {
@@ -373,6 +304,39 @@ public class PlayerController : MonoBehaviour {
 
 		currentLives = initialLives;
 		gameController.displayLives.text = "Lives: " + currentLives.ToString ();
+
+		//Damage
+		playerDamage = 0;
+		gameController.displayDamage.text = "Damage: "+playerDamage.ToString();
+
+		currentDirection = new Vector2(0,1.0f);
+		currentSpeed = speed;
+		shieldSprite = GameObject.FindGameObjectWithTag ("Shield");
+
+		if (gameController.invincible) {
+
+			gameController.displayShield.enabled = false;
+
+			Destroy (shieldSprite);
+
+			gameController.displayLives.enabled=false;
+
+		} else {
+
+			currentShield = gameController.shield;
+			gameController.displayShield.text = "Shield: " +currentShield.ToString();
+
+			shieldSprite.transform.localScale = new Vector3 (shieldSpriteSize, shieldSpriteSize, 0f);
+			currentShieldSpriteSize = shieldSpriteSize;
+
+			// set the shield sprite size increment 
+			changeShieldSpriteBy = (shieldSpriteSize - smallestShieldSize) / gameController.shield;
+			// Debug.Log (changeShieldSpriteBy);
+
+			currentLives = gameController.lives;
+			gameController.displayLives.text = "Lives: " + currentLives.ToString ();
+
+		}
 
 	}
 } // END class

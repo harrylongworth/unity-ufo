@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour {
 	public GameObject mapEdge;
 	public GameObject player;
 	public GameObject background;
+	public GameObject pauseWindow;
+	public GameObject gameWindow;
 
 	public GameObject MovementGUI;
 	public bool paused=false;
@@ -58,8 +60,9 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		targetManager = GetComponent<TargetManager> ();
-
-		NewGame ();
+		Time.timeScale = 0f;
+		pauseWindow.GetComponent<PauseWindow> ().OpenWindow ();
+		// NewGame ();
 
 
 	} // END start
@@ -162,6 +165,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void onPause() {
+		gameWindow.GetComponent<GameWindow> ().CloseWindow ();
+		player.SetActive (false);
 		if (Time.timeScale == 1) {
 				Time.timeScale = 0f;
 		}
@@ -169,27 +174,32 @@ public class GameController : MonoBehaviour {
 		paused = true;
 		pausedtime = Time.time;
 
-		pauseButton.text = ">";
+		pauseWindow.GetComponent<PauseWindow> ().canContinue = true;
+		pauseWindow.GetComponent<PauseWindow> ().OpenWindow ();
+		//pauseButton.text = ">";
 
 	}
 
 	public void OnPlay() {
-		
+		player.SetActive (true);
+		gameWindow.GetComponent<GameWindow> ().OpenWindow ();
 		if (Time.timeScale == 0 || (Time.time-pausedtime>0.3)) {
 			Time.timeScale = 1f;
 		}
 
+
 		paused = false;
-		pauseButton.text = "| |";
+		// pauseButton.text = "| |";
 
 
 	}
 
 	public void NewGame() {
+		OnPlay ();
 
-		currentLevel=0;
+		currentLevel=Random.Range(0,targetManager.GetLength());
+
 		player.GetComponent<PlayerController>().NewGame();
-
 		NewLevel ();
 
 
