@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour {
 						//restart level
 						Time.timeScale=0;
 
-						gameController.currentLevel++;
+						gameController.incrementCurrentLevel();
 						gameController.NewLevel ();
 						// Application.LoadLevel (Application.loadedLevel);
 						Debug.Log ("RESTART! - Level Complete");
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour {
 					Time.timeScale=0;
 					Debug.Log ("RESTART! - Level Complete");
 
-					gameController.currentLevel++;
+					gameController.incrementCurrentLevel();
 					gameController.NewLevel ();
 					// Application.LoadLevel (Application.loadedLevel);
 

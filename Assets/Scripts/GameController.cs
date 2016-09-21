@@ -262,4 +262,11 @@ public class GameController : MonoBehaviour {
 		ShieldPowerUpController.Spawn (halfMapSide,shieldPowerUp);
 	}
 
+	public void incrementCurrentLevel() {
+
+		currentLevel++;
+		if (currentLevel > targetManager.GetLength ()) {
+			currentLevel = 0;
+		}
+	} // end incrementCurrentLevel
 } // FND class
