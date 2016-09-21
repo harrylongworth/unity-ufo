@@ -22,7 +22,7 @@ public class TargetManager : MonoBehaviour {
 		if (id < targets.Length) {
 			return targets [id];
 		} else {
-			return targets[id];
+			return targets[0];
 		}
 
 	}

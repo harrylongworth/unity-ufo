@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour {
 					targetTally++;
 
 					// CHECK VICTORY conditions
-					if (targetTally > gameController.targetsNeededToWin) {
+					if (targetTally > (gameController.targetsNeededToWin-1)) {
 						//restart level
 						Time.timeScale=0;
 
