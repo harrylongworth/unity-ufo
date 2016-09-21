@@ -16,9 +16,12 @@ public class TargetController : MonoBehaviour {
 
 		if (objectArray != null) {
 			foreach (GameObject item in objectArray) {
-
-				GameObject.Destroy (item);
+				if (item != null) {
+					// Debug.Log ("Destroying " + item.name);
+					GameObject.Destroy (item.gameObject);
+				}
 			}
+			objectArray = null;
 
 		} // END if
 
@@ -48,12 +51,7 @@ public class TargetController : MonoBehaviour {
 		float spawnRangeX = spawnRange-borderX;
 		float spawnRangeY = spawnRange-borderY;
 
-		int spriteCount = 0;
-		if (targetType.name == "ShieldPowerUp") {
-			spriteCount = 1;
-		} else {
-			spriteCount = targetType.GetComponent<SpriteManager> ().GetLength ();
-		}
+		int spriteCount = targetType.GetComponent<SpriteManager> ().GetLength ();
 
 		int totalObjects = setsToSpawn * spriteCount;
 			
@@ -68,19 +66,12 @@ public class TargetController : MonoBehaviour {
 				Quaternion spawnRotation = Quaternion.identity;
 				GameObject targetTemp = (GameObject) Instantiate (targetType, spawnPosition, spawnRotation);
 
-				if (targetType.name == "ShieldPowerUp") {
-					targetTemp.name = "ShieldPowerUp";
-				} else {
-					targetTemp.name = x.ToString();
-					targetTemp.GetComponent<SpriteManager> ().SetSpriteByID (x);
-				}
-
+				targetTemp.name = x.ToString();
+				targetTemp.GetComponent<SpriteManager> ().SetSpriteByID (x);
 
 				objectArray [arrayCounter] = targetTemp;
 				arrayCounter++;
 
-				// string debugMessage = "Sprite " + targetTemp.GetComponent<SpriteRenderer> ().sprite.name + " issued ID " + targetTemp.name;
-				// Debug.Log (debugMessage);
 
 			}
 		} // END for

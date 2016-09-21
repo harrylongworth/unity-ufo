@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\PixelPerfectCamera.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\QuestIndicatorController.cs" />
+     <Compile Include="Assets\Scripts\ShieldPowerUpController.cs" />
      <Compile Include="Assets\Scripts\SimpleTouchPadPlayer.cs" />
      <Compile Include="Assets\Scripts\TargetController.cs" />
      <Compile Include="Assets\Scripts\TileMap.cs" />

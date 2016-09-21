@@ -230,6 +230,7 @@ public class GameController : MonoBehaviour {
 
 		var currentTarget = targetManager.GetTarget(currentLevel);
 
+		ShieldPowerUpController.DestroyAll ();
 		TargetController.DestroyAll (); 
 		TargetController.Spawn (targetSets,halfMapSide,currentTarget);
 
@@ -257,8 +258,8 @@ public class GameController : MonoBehaviour {
 
 
 	public void SpawnShieldPowerUp() {
-		Debug.Log ("Shield Power Up Spawned");
-		TargetController.Spawn (1,halfMapSide,shieldPowerUp);
+		// Debug.Log ("Shield Power Up Spawned");
+		ShieldPowerUpController.Spawn (halfMapSide,shieldPowerUp);
 	}
 
 } // FND class
