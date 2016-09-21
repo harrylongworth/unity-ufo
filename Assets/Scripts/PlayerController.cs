@@ -141,6 +141,11 @@ public class PlayerController : MonoBehaviour {
 	{
 		// Debug.Log (other.tag);
 
+		if (other.gameObject.CompareTag ("ShieldPowerUp")) {
+			SetShieldsToFull ();
+			GameObject.Destroy (other.gameObject);
+		}
+
 		if (other.gameObject.CompareTag ("Target")) {
 			// other.gameObject.SetActive (false);
 
@@ -236,6 +241,10 @@ public class PlayerController : MonoBehaviour {
 	public void IncrementPlayerDamage() {
 
 		playerDamage++;
+		if (playerDamage % 2 == 1) {
+			gameController.SpawnShieldPowerUp ();
+		}
+
 		gameController.displayDamage.text = "Damage: " + playerDamage.ToString ();
 
 		if (!gameController.invincible) {
@@ -323,11 +332,7 @@ public class PlayerController : MonoBehaviour {
 
 		} else {
 
-			currentShield = gameController.shield;
-			gameController.displayShield.text = "Shield: " +currentShield.ToString();
-
-			shieldSprite.transform.localScale = new Vector3 (shieldSpriteSize, shieldSpriteSize, 0f);
-			currentShieldSpriteSize = shieldSpriteSize;
+			SetShieldsToFull();
 
 			// set the shield sprite size increment 
 			changeShieldSpriteBy = (shieldSpriteSize - smallestShieldSize) / gameController.shield;
@@ -339,4 +344,13 @@ public class PlayerController : MonoBehaviour {
 		}
 
 	}
+
+		private void SetShieldsToFull() {
+			currentShield = gameController.shield;
+			gameController.displayShield.text = "Shield: " +currentShield.ToString();
+
+			shieldSprite.transform.localScale = new Vector3 (shieldSpriteSize, shieldSpriteSize, 0f);
+			currentShieldSpriteSize = shieldSpriteSize;
+
+		}
 } // END class

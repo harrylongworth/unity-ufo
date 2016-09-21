@@ -269,6 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapEdge: {fileID: 1000011782126192, guid: 3bd9747a5dd5f4b04b2d3e4b956034e6, type: 2}
   player: {fileID: 1230378368}
+  shieldPowerUp: {fileID: 1000012357369672, guid: d543fd3861ee54a58abe87d8f75f6918,
+    type: 2}
   background: {fileID: 683954738}
   pauseWindow: {fileID: 2028354894}
   gameWindow: {fileID: 1431411403}
@@ -284,7 +286,7 @@ MonoBehaviour:
   bounceOffEdge: 1
   targetsNeededToWin: 10
   targetSetsNeededToWin: 1
-  targetSets: 5
+  targetSets: 3
   halfMapSide: 1024
   questIndicator: {fileID: 377198865}
   displayTime: {fileID: 1997646044}

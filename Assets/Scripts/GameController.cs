@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour {
 	// public GameObject [] targets;
 	public GameObject mapEdge;
 	public GameObject player;
+	public GameObject shieldPowerUp;
 	public GameObject background;
 	public GameObject pauseWindow;
 	public GameObject gameWindow;
@@ -224,10 +225,12 @@ public class GameController : MonoBehaviour {
 
 
 		// Spawn Map Edge
+
 		MapEdgeController.Spawn (halfMapSide,mapEdge);
 
 		var currentTarget = targetManager.GetTarget(currentLevel);
 
+		TargetController.DestroyAll (); 
 		TargetController.Spawn (targetSets,halfMapSide,currentTarget);
 
 		if (enableQuests) {
@@ -251,5 +254,11 @@ public class GameController : MonoBehaviour {
 		}		// END enableQuests is true
 
 	} // END NewLevel
+
+
+	public void SpawnShieldPowerUp() {
+		Debug.Log ("Shield Power Up Spawned");
+		TargetController.Spawn (1,halfMapSide,shieldPowerUp);
+	}
 
 } // FND class

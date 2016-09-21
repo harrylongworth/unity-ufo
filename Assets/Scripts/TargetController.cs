@@ -7,13 +7,8 @@ public class TargetController : MonoBehaviour {
 	public bool disableQuestIndicator = true;
 
 	private GameObject player;
-
-
 	public float maxVelocity = 200f;
 	private Rigidbody2D rb2d;
-	public string targetName;
-	public bool isIndicator=false;
-
 	private Vector3 offset;
 
 
@@ -41,25 +36,10 @@ public class TargetController : MonoBehaviour {
 
 	void Update() {
 
-		if (tag == "Indicator") {
-			player = GameObject.FindGameObjectWithTag ("Player");
-			offset = new Vector3(0.5f,+1*(Screen.height/2)*0.3f,5.0f);
-
-			// offset = new Vector3(-1*(Screen.width/2)*0.6f,-1*(Screen.height/2)*0.6f,0.0f);
-			// offset = Vector3.zero;
-
-			rb2d.velocity=Vector2.zero;
-			// rb2d.velocity = player.GetComponent<Rigidbody2D>().velocity;
-
-			transform.position = player.transform.position + offset;
-			// transform.position = player.transform.position;
-		} 
-
 	} // END Update
 
 	public static void Spawn(int setsToSpawn,float halfMapSide, GameObject targetType) {
 
-		TargetController.DestroyAll (); 
 
 		float borderX = Screen.width / 2;
 		float borderY = Screen.height / 2;
@@ -68,7 +48,13 @@ public class TargetController : MonoBehaviour {
 		float spawnRangeX = spawnRange-borderX;
 		float spawnRangeY = spawnRange-borderY;
 
-		int spriteCount = targetType.GetComponent<SpriteManager> ().GetLength ();
+		int spriteCount = 0;
+		if (targetType.name == "ShieldPowerUp") {
+			spriteCount = 1;
+		} else {
+			spriteCount = targetType.GetComponent<SpriteManager> ().GetLength ();
+		}
+
 		int totalObjects = setsToSpawn * spriteCount;
 			
 		objectArray = new GameObject[totalObjects];
@@ -81,8 +67,14 @@ public class TargetController : MonoBehaviour {
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnRangeX, spawnRangeX), Random.Range (-spawnRangeY, spawnRangeY),1.0f);
 				Quaternion spawnRotation = Quaternion.identity;
 				GameObject targetTemp = (GameObject) Instantiate (targetType, spawnPosition, spawnRotation);
-				targetTemp.name = x.ToString();
-				targetTemp.GetComponent<SpriteManager> ().SetSpriteByID (x);
+
+				if (targetType.name == "ShieldPowerUp") {
+					targetTemp.name = "ShieldPowerUp";
+				} else {
+					targetTemp.name = x.ToString();
+					targetTemp.GetComponent<SpriteManager> ().SetSpriteByID (x);
+				}
+
 
 				objectArray [arrayCounter] = targetTemp;
 				arrayCounter++;
